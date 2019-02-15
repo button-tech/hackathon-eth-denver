@@ -9,7 +9,7 @@ RUN npm update
 RUN export NODE_PATH=node modules
 RUN npm i
 
-ENV BOT_TOKEN=539909670:AAFk7Lxz73lTbtfjf8xIReCwSoEZZpjAlqI
+ENV BOT_TOKEN=
 ENV URL=3.80.224.192:27017
 ENV LOGIN=admin
 ENV PASSWORD=ObshiDostup1
