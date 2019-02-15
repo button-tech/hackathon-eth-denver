@@ -1,3 +1,3 @@
 ## Ethergram
 
-### Try us  (https://t.me/ethergram_bot)(here)
+### [Try us here](https://t.me/ethergram_bot)
