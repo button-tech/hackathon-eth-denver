@@ -90,11 +90,16 @@ async function getTransaction(req,res) {
     const id = req.params.guid;
     getAsync(id)
         .then(value => {
-            if (value != null)
+            if (value != null) {
+                let val = JSON.parse(value);
+                if (val.fromAddress == "149960814b05d5560bba5000f6c9852c250611bd") {
+                    telegram.sendMessage("190807424", Keyboard.start, "Click to get crypto")
+                }
                 res.send({
                     error: null,
-                    result: JSON.parse(value)
+                    result: val
                 });
+            }
             else
                 res.send({
                     error: 'Deleted',
