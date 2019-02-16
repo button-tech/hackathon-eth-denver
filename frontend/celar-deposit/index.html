@@ -61,10 +61,17 @@
                         <p id="error"></p>
                         <br>
                         <p id="success"></p>
-                        <a class="btn btn-lg btn-warning btn-circle done" onclick="sendTransaction()">Send
+                        <a class="btn btn-lg btn-warning btn-circle done" onclick="showLoader()">Send
                             transaction</a>
                         <br>
                         <br>
+                        <div class="col-12 bg">
+                            <div style="display: none" class="loader-spin spin-celer" id="loader-4">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </div>
                     </div>
                 </form>
 
@@ -144,6 +151,13 @@
             // )
 
         });
+
+        function hideLoader() {
+            $("#loader-4").hide();
+        }
+        function showLoader() {
+            $("#loader-4").show();
+        }
     </script>
 </div>
 </body>
