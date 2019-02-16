@@ -2,6 +2,8 @@
 docker rm -f $(docker ps -a -q)
 docker pull neojt/mredis
 
+docker run -p 8080:8080 -d erage/rates
+
 docker run -d -p 6379:6379 neojt/mredis
 
 cd telegram

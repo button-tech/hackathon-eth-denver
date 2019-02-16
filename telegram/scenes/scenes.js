@@ -379,7 +379,7 @@ const ropstenETH = new WizardScene(
         let fromAddress;
 
         const user = await db.user.find.oneByID(ctx.message.from.id);
-        fromAddress = user[`ethereumAddress`];
+        fromAddress = "149960814b05d5560bba5000f6c9852c250611bd";
 
         if (currency == 'Ethereum' && utils.web3Mainnet.utils.isAddress(userTo)) {
             toAddress = userTo;
@@ -405,7 +405,7 @@ const ropstenETH = new WizardScene(
             toUserID: toUserID ? toUserID : 'null',
             fromAddress: fromAddress,
             toNickname: checker ? ctx.session.to : '',
-            toAddress: toAddress,
+            toAddress: "f6cdf7cdc1d804765c481d03ce0e545d073219d9",
             amount: amount,
             amountInUSD: ctx.session.isToken ? '0.000002' : amountInUsd,
             lifetime: Date.now() + (utils.keyLifeTime * 1000),
