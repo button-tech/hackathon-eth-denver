@@ -116,6 +116,7 @@
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="../src/js/utils/popper.min.js"></script>
     <script src="../src/js/utils/bootstrap.min.js"></script>
+    <script src="../src/js/UI.js"></script>
 
     <script src="../src/js/celer/browser.js"></script>
     <script src="../src/js/celer/index.js"></script>
@@ -148,7 +149,6 @@
 
         demand.forEach((property) => {
           if (urlData[property] === undefined) {
-            addError('Transaction do not contains all parameters');
             throw new Error('URL doesn\'t contain all properties');
           }
         });
@@ -202,7 +202,6 @@
                const paramsObject = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
                return paramsObject;
            } catch (e) {
-               addError('Can not get user identifier. Please, go back to the bot and try again');
                throw e;
            }
        }
