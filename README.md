@@ -13,7 +13,8 @@
 
 3. We use [ShapeShift](https://shapeshift.io/#/coins) to allow you to exchange ETH to other cryptocurrencies
 
-4. We use [Rhombus](https://kauri.io/article/74ed99544dc34542afccb51ac7532d3f/v3/rhombus-sponsor-bounty-at-ethdenver-2019!) to have exchange rates (Example: http://ethergram.tk/rate/usd-btc)
+4. We use [Rhombus](https://kauri.io/article/74ed99544dc34542afccb51ac7532d3f/v3/rhombus-sponsor-bounty-at-ethdenver-2019!) to have exchange rates (Example: http://ethergram.tk:8080/rate/usd-btc) (Support to usd-eth eth-usd usd-xdai xdai-usd dai-usd usd-dai usd-btc btc-usd)
+
 
 
 # Project Tagline/Description 
@@ -34,6 +35,7 @@ Telegram client to send and swap crypto secure via @nickname!
 
 0x0415e8cec41975a3ea53eb6a817261c1768488f304d4560030c114a07ff5f8a920fc3cfcf1676f1f111b1d85b1fc1310fa883d25baaa29024ca5001c16e25331ac - Artem Vorobeev
 
+0x048e3092939403ee7d75fd5933510cfeb2ab7721300006f8788a2b9534780fa8a7f8a95ce4295c6c21dd93d2d87909f15889ee66ecaeb6ca4fa86bed8d4955d5bc - Alex Lebed
 
 # Detailed Project Description (no more than 3-4 sentences)
 That's a secure messenger client to make transactions which is super easy to use. You don't need to download anything and you can send transactions via @nickname. We were inspired by WeChat payments. We build it not only on ETH but also on BTC and second layer of ETH called Celer Network. That's mean - very low fees and fast payments!
