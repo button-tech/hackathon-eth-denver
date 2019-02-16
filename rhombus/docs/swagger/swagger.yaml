@@ -1,0 +1,41 @@
+basePath: /
+definitions:
+  responses.ExchangeResponse:
+    properties:
+      rate:
+        type: number
+    type: object
+host: ethergram.tk:8080
+info:
+  contact:
+    email: enormousrage@gmail.com
+    name: API Support
+  description: This is Rhombus Exchnage rates API
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  title: Swagger Exchange API
+  version: "1.0"
+paths:
+  /rate/{currency}:
+    get:
+      consumes:
+      - text/plain
+      description: Return exchange rate of specific currency group
+      parameters:
+      - description: currency
+        in: path
+        name: currency
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/responses.ExchangeResponse'
+            type: array
+      summary: Return exchange rate of specific currency group
+swagger: "2.0"
