@@ -60,7 +60,7 @@
       "text": "Operations with Celer",
       "deposit":{
         "button":"💎 Deposit Celer",
-        "callback":"https://ethergram.tk/celer/deposit/?tx="
+        "callback":"https://ethergram.tk/celer-deposit/?tx="
       },
       "withdraw":{
         "button":"🚪 Withdraw Celer",

@@ -221,7 +221,7 @@
         try {
           cid = await client.openEthChannel(capacityWei, peerCapacityWei)
         }
-        catch (err) {
+        catch (e) {
           openChannelMsgElem.innerHTML = JSON.stringify(e);
           return;
         }
