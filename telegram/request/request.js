@@ -7,6 +7,11 @@ async function getTokenBalance(tokenAddress, userAddress) {
     return tokenBalances;
 }
 
+async function getBTCBalance(userAddress) {
+    return JSON.parse(await rp.get(`https://insight.bitpay.com/api/addr/${userAddress}`)).balance;
+}
+
 module.exports = {
-    getTokenBalance: getTokenBalance
+    getTokenBalance: getTokenBalance,
+    getBTCBalance: getBTCBalance
 };
