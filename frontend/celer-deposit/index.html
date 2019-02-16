@@ -121,20 +121,14 @@
     <script src="../src/js/celer/index.js"></script>
 
     <script type="text/javascript">
-      async function getData() {
-        return new Promise((resolve) => {
-          resolve({
-            fromAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
-            sumInETH: "0.005",
-            sumInWei: "5000",
-          });
-        })
+       function getData() {
+          return getTxData()
       }
 
       async function getTxData() {
         const shortlink = getShortlink();
         try {
-          const queryURL = `${backendURL}/celerdeposit/${shortlink}`;
+          const queryURL = `${backendURL}/transaction/${shortlink}`;
           const response = await query('GET', queryURL);
           console.log(response)
           if (response.error == null)
