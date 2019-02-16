@@ -137,8 +137,8 @@
         return urlData.tx;
       }
 
-      function hideDepoistBtn() {
-        $("#deposit-btn").hide();
+      function hideSendBtn() {
+        $("#send-btn").hide();
       }
 
       // function showDepoistBtn() {
@@ -157,15 +157,13 @@
 
         document.getElementById("send-btn").addEventListener("click", async () => {
           showLoader();
-          hideDepoistBtn();
+          hideSendBtn();
 
           const elem = document.getElementById("send-result");
 
-          client.depositEth(amountInWei).then(msg => {
-            // const url = `https://ropsten.etherscan.io/tx/${txHash}`;
-            // elem.href = url;
-            // elem.innerHTML = url;
-            elem.innerHTML = "msg";
+          client.sendEth(amountInWei).then(msg => {
+
+            elem.innerHTML = "Payment was sent";
 
             client.getEthBalance().then((resp) => {
               document.getElementById("celar-balance").innerHTML = `${resp.freeBalance} Wei`;
