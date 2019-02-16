@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../src/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="../src/styles/send/custom.css">
+    <title>Ethergram</title>
+</head>
+<body id="container">
+
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div id="main" class="col-12 my-auto">
+                <div class="col-12">
+                    <div style="display: flex; flex-direction: column; align-items: center">
+                        <strong style="color: black" >Open Celer Channel</strong>
+                        <div>0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</div>
+                        <div>Channel capasity: 0.25</div>
+                    </div>
+
+                    <br/>
+
+                    <table class="table table-hover table-dark">
+
+                        <tbody>
+                        <tr>
+                            <th scope="col">Your Address</th>
+                            <th id="src-address" scope="col">0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</th>
+                        </tr>
+                        </tbody>
+
+                        <tbody>
+                        <tr>
+                            <th scope="col">Destination Address</th>
+                            <th id="dst-address" scope="col">0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</th>
+                        </tr>
+                        </tbody>
+
+                        <tbody>
+                        <tr>
+                            <th scope="col">Transfer sum</th>
+                            <th id="value" scope="col">0.05 ETH / ~1$</th>
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+                <br>
+
+                <form>
+                    <div class="text-center col-12">
+                        <p id="error"></p>
+                        <br>
+                        <p id="success"></p>
+                        <a class="btn btn-lg btn-warning btn-circle done" onclick="sendTransaction()">Send
+                            transaction</a>
+                        <br>
+                        <br>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+
+        <div style="display: none" class="alert alert-success col-12" id="Success_pop">
+            <div class="row">
+                <div class="col-10">
+                    <h2>Success</h2>
+                    <h5>You are done</h5>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="close" onclick="CloseAlert(1)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../src/js/celer/index.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../src/js/utils/popper.min.js"></script>
+    <script src="../src/js/utils/bootstrap.min.js"></script>
+
+    <script src="../src/js/celer/browser.js"></script>
+    <script src="../src/js/celer/index.js"></script>
+
+    <script type="text/javascript">
+      function getData() {
+        return {
+          fromAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
+          toAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
+          amount: "0.005",
+          sumInDollars: "5",
+        }
+      }
+
+      $(document).ready(function () {
+
+        //document.getElementById("address").innerHTML = address.toUpperCase();
+        // openChannel(client1, 'c1', channelCapacity);
+        //
+        // openChannel().then(
+        //
+        // )
+
+      });
+    </script>
+</div>
+</body>
+</html>
