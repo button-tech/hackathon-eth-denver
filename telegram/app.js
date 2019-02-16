@@ -26,9 +26,11 @@ bot.hears(Text.keyboard.account.button["1"], (ctx) => Handlers.getBalances(ctx))
 bot.hears(Text.back, (ctx) => Handlers.back(ctx));
 
 stage.register(scenes.mainnetETH);
+stage.register(scenes.mainnetBTC);
 stage.register(scenes.ExchangeScene);
 
 bot.action("mainnet", ctx=>{ctx.scene.enter("mainnetETH")});
+bot.action("btc", ctx=>{ctx.scene.enter("mainnetBTC")});
 bot.action("celar", ctx=>{ctx.scene.enter("mainnetETH")});
 
 bot.startPolling();

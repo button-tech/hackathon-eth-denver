@@ -5,6 +5,10 @@ const explorers = {
         "mainnet": 'https://etherscan.io/tx/',
         "testnet": 'https://ropsten.etherscan.io/tx/'
     },
+    "Bitcoin": {
+        "mainnet": 'https://www.blockchain.com/btc/tx/',
+        "testnet": 'https://live.blockcypher.com/btc-testnet/tx/'
+    }
 };
 
 function CloseAlert(arg) {

@@ -144,7 +144,82 @@ const mainnetETH = new WizardScene(
     }
 );
 
+const mainnetBTC = new WizardScene(
+    "mainnetBTC", ctx => {
+        ctx.session.currency = "Bitcoin";
+        ctx.reply(Text.dialog.sendTransaction["2"]);
+        return ctx.wizard.next()
+    },
+    ctx => {
+        ctx.session.to = ctx.message.text;
+        ctx.reply(Text.dialog.sendTransaction["3"]);
+        return ctx.wizard.next()
+    },
+    async ctx => {
+        const tickerFrom = "BTC";
+        const currency = ctx.session.currency;
+        let amount;
+        let amountInUsd;
+        if (ctx.message.text.indexOf("$") >= 0) {
+            amountInUsd = ctx.message.text.substring(0, ctx.message.text.length-1);
+            amount = (Number(await utils.course.convert("USD", tickerFrom, amountInUsd)));
+        } else {
+            amount = ctx.message.text;
+            amountInUsd = Number((await utils.course.convert(tickerFrom, "USD", amount)).toFixed(2));
+        }
+        console.log(amountInUsd);
+        const key = guid.create().value;
+
+        const userTo = ctx.session.to;
+
+        let toUserID;
+        let toAddress;
+        let checker = false;
+        let fromAddress;
+
+        const user = await db.user.find.oneByID(ctx.message.from.id);
+        fromAddress = user[`bitcoinAddress`];
+
+        if (currency == 'Bitcoin' && (currency.indexOf("1") == 0 || currency.indexOf("3") == 0)) {
+            toAddress = userTo;
+        } else {
+            let to = ctx.session.to;
+            if (to.match('@')) {
+                to = to.substring(1);
+            }
+            const user = await db.user.find.oneByNickname(to);
+            if (user) {
+                toUserID = user.userID;
+                toAddress = user.bitcoinAddress;
+                checker = true;
+            } else {
+                ctx.reply("User not defined");
+                return ctx.scene.leave();
+            }
+        }
+
+        const value = JSON.stringify({
+            currency: currency,
+            fromUserID: ctx.message.from.id,
+            toUserID: toUserID ? toUserID : 'null',
+            fromAddress: fromAddress,
+            toNickname: checker ? ctx.session.to : '',
+            toAddress: toAddress,
+            amount: amount,
+            amountInUSD: amountInUsd,
+            lifetime: Date.now() + (utils.keyLifeTime * 1000),
+        });
+
+        utils.client.set(key, value, 'EX', utils.keyLifeTime);
+        console.log(value);
+        ctx.reply(Text.inline_keyboard.send_transaction.text, Extra.markup(Keyboard.create_transaction(key)));
+
+        return ctx.scene.leave();
+    }
+);
+
 module.exports = {
     ExchangeScene:ExchangeScene,
-    mainnetETH:mainnetETH
+    mainnetETH:mainnetETH,
+    mainnetBTC: mainnetBTC
 };
