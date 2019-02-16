@@ -6,6 +6,7 @@ const Keyboard = require('./../keyboard/keyboard');
 const Text = require('./../text');
 const db = require('./../db/db');
 const utils = require('./../utils/utils');
+const token = require('../tokens/tokens');
 const { ShapeShift } = require('../shapeshift/shapeshift');
 require('dotenv').config({path: "./../../.env"});
 
@@ -43,9 +44,9 @@ const ExchangeScene = new WizardScene(
 
 
         const user = await db.user.find.oneByID(ctx.message.from.id);
-        const fromAddress = user[`ethereumAddress`];
-        const secondCurrencyAddress = currencyTo == "Bitcoin" ? user[`bitcoinAddress`] : fromAddress;
-
+        const fromAddress = user[`${currencyFrom.toLowerCase()}Address`];
+        const secondCurrencyAddress = (Object.keys(token.supportedTokens)).indexOf(currencyTo) == -1 ? user[`${currencyTo.toLowerCase()}Address`] : user[`ethereumAddress`];
+        console.log(secondCurrencyAddress)
         const toAddress = await ShapeShift.investment.getExchangeAddress(secondCurrencyAddress, ShapeShift.pairs[currencyFrom.toLowerCase()][currencyTo.toLowerCase()], fromAddress);
         const value = JSON.stringify({
             currencyFrom: currencyFrom,

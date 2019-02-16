@@ -78,7 +78,7 @@ async function sendTransaction() {
         } else if (currency == 'Bitcoin') {
             amount = Number((amount * 10 ** 8).toFixed());
             let rawTx = (await Bitcoin.transactions.signTransaction(decryptedData[currency], toAddress, amount));
-            transactionHash = await Bitcoin.transactions.sendSigned(rawTx);
+            transactionHash = (await Bitcoin.transactions.sendSigned(rawTx)).txid;
         }
 
         console.log(transactionHash);

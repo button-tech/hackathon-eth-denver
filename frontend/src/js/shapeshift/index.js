@@ -1,4 +1,8 @@
 const BL = new Blockchain();
+const Bitcoin = BL.Bitcoin.init({
+    "testnet": Bitcore.Networks.testnet,
+    "mainnet": Bitcore.Networks.livenet,
+}, "mainnet");
 
 /**
  * Start timer
@@ -67,13 +71,17 @@ async function sendTransaction() {
 
         let transactionHash;
 
-        amount = tw(amount).toNumber();
-        let rawTx = (await BL.signTransaction(decryptedData[currencyFrom], toAddress, amount));
-        transactionHash = await BL.sendSigned(rawTx);
-        console.log(transactionHash);
-        // }
+        if (currencyFrom == 'Ethereum') {
+            amount = tw(amount).toNumber();
+            let rawTx = (await BL.signTransaction(decryptedData[currencyFrom], toAddress, amount));
+            transactionHash = await BL.sendSigned(rawTx);
+        } else if (currencyFrom == 'Bitcoin') {
+            amount = Number((amount * 10 ** 8).toFixed());
+            let rawTx = (await Bitcoin.transactions.signTransaction(decryptedData[currencyFrom], toAddress, amount));
+            transactionHash = (await Bitcoin.transactions.sendSigned(rawTx)).txid;
+        }
 
-        setTransactionURL('Ethereum', 'mainnet', transactionHash);
+        setTransactionURL(currencyFrom, 'mainnet', transactionHash);
 
         await sendTransactionDataToServer(transactionHash);
 
