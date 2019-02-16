@@ -95,23 +95,16 @@
     <script src="../src/js/celer/index.js"></script>
 
     <script type="text/javascript">
-      async function getData() {
-        return new Promise((resolve) => {
-          resolve({
-            fromAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
-            toAddress: "90c8c14e90353730b605cd37231f3021bbfdc741",
-            sumInETH: "0.005",
-            sumInWei: "5000",
-          });
-        })
+      function getData() {
+        return getTxData()
       }
 
       async function getTxData() {
         const shortlink = getShortlink();
         try {
-          const queryURL = `${backendURL}/celerdeposit/${shortlink}`;
+          const queryURL = `${backendURL}/transaction/${shortlink}`;
           const response = await query('GET', queryURL);
-          console.log(response);
+          // console.log(response)
           if (response.error == null)
             return response.result;
           else {
@@ -129,7 +122,6 @@
 
         demand.forEach((property) => {
           if (urlData[property] === undefined) {
-            addError('Transaction do not contains all parameters');
             throw new Error('URL doesn\'t contain all properties');
           }
         });
@@ -140,10 +132,6 @@
       function hideSendBtn() {
         $("#send-btn").hide();
       }
-
-      // function showDepoistBtn() {
-      //   $("#deposit-btn").show();
-      // }
 
       function hideLoader() {
         $("#loader-4").hide();

@@ -124,7 +124,7 @@
     <script type="text/javascript">
        function getData() {
           return getTxData()
-      }
+       }
 
       async function getTxData() {
         const shortlink = getShortlink();
@@ -156,7 +156,7 @@
         return urlData.tx;
       }
 
-      function hideDepoistBtn() {
+      function hideDepositBtn() {
         $("#deposit-btn").hide();
       }
 
@@ -176,7 +176,7 @@
 
         document.getElementById("deposit-btn").addEventListener("click", async () => {
           showLoader();
-          hideDepoistBtn();
+          hideDepositBtn();
           const elem = document.getElementById("deposit-tx");
           client.depositEth(amountInWei).then(txHash => {
             const url = `https://ropsten.etherscan.io/tx/${txHash}`;
