@@ -1,21 +1,16 @@
-We created amazing service, which allows people borrow and loan eth (and a lot of other cool thinks) in telegram bot.
+## Ethergram
 
-You can:
-* create eth wallet 
-* sending eth to other users (by address and @nickname)
-* view balance of your wallet
-* create borrow order
-* view list of borrow orders
-* accept borrow order (loan money)
-and all this stuff just using telegram without any additional application.
+<img src="https://raw.githubusercontent.com/button-tech/hackathon-eth-denver/master/general/ethergram-wide.png" alt="" data-canonical-src="https://raw.githubusercontent.com/button-tech/hackathon-eth-denver/master/general/ethergram-wide.png" height="350" />
 
-As bonus, you  are getting:
-* innovative storing private key in encrypted Qr Code (by your own password on your own device)
-* it's working on mobile phone, too (compare with metamask and other solutions)
-* bZx contract under the hood (with our own api to this contract).
+# [Try us here](https://t.me/ethergram_bot)
 
-We think that it's really important to have a user-friendly solution in blockchains. 
-So, we decided to link Telegram messenger with Ethereum (becouse everyone have telegram but it's not exactly). 
-We decided to use the bZx protocol whick allows people to interact with each other using classic messengers but with all feature of the blockchain. 
+# What is it?
 
-Just try it and you will see how it simple.
+### It's a Telegram app that allows to:
+1.  Send Ethereum transactions and ERC20 tokens via Telegram secure (only client side)
+
+2. We use [Celler Network](https://medium.com/celer-network/celer-network-lets-buidl-scalable-dapps-at-ethdenver-8c3d54e8926f) to allow you to send transactions.
+
+3. We use [ShapeShift](https://shapeshift.io/#/coins) to allow you to exchange ETH to other cryptocurrencies
+
+4. We use [Rhombus](https://kauri.io/article/74ed99544dc34542afccb51ac7532d3f/v3/rhombus-sponsor-bounty-at-ethdenver-2019!) to have exchange rate ETH/USD
