@@ -30,12 +30,12 @@ const sendInlineButton = (userID, text, url) => {
             'chat_id': userID,
             'text': text,
             'parse_mode': 'Markdown',
-            'reply_markup': JSON.stringify([{
+            'reply_markup': [JSON.stringify({
                 "inline_keyboard": {
                     "text": "OPEN",
                     "url": url,
                 },
-            }]),
+            })],
             'disable_web_page_preview': true
         },
         json: true
