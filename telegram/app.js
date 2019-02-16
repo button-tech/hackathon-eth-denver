@@ -38,6 +38,7 @@ bot.action("tokens", ctx=>{ctx.scene.enter("tokens")});
 bot.action("btc", ctx=>{ctx.scene.enter("mainnetBTC")});
 bot.action("celerDeposit", ctx=>{ctx.scene.enter("celerDeposit")});
 bot.action("celerWithdraw", ctx=>{ctx.scene.enter("celerWithdraw")});
+bot.action("celer", ctx=>{ctx.scene.enter("ropstenETH")});
 
 bot.startPolling();
 
