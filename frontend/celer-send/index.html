@@ -58,8 +58,8 @@
                 </div>
 
                 <div class="col-12 bg" style="display: flex; justify-content: center">
-                    <a class="btn btn-lg btn-warning btn-circle done" id="deposit-btn">Send</a>
-                    <a id="deposit-tx"></a>
+                    <a class="btn btn-lg btn-warning btn-circle done" id="send-btn">Send</a>
+                    <div id="send-result"></div>
                     <div style="display: none" class="loader-spin spin-celer" id="loader-4">
                         <span></span>
                         <span></span>
@@ -153,24 +153,25 @@
         $("#loader-4").show();
       }
 
-      function addDepositCallback(client, amountInWei) {
+      function addSendCallback(client, amountInWei) {
 
-        document.getElementById("deposit-btn").addEventListener("click", async () => {
+        document.getElementById("send-btn").addEventListener("click", async () => {
           showLoader();
           hideDepoistBtn();
-          const elem = document.getElementById("deposit-tx");
-          client.depositEth(amountInWei).then(txHash => {
-            const url = `https://ropsten.etherscan.io/tx/${txHash}`;
-            elem.href = url;
-            elem.innerHTML = url;
 
-            const balance = client.getEthBalance().then((resp) => {
+          const elem = document.getElementById("send-result");
+
+          client.depositEth(amountInWei).then(msg => {
+            // const url = `https://ropsten.etherscan.io/tx/${txHash}`;
+            // elem.href = url;
+            // elem.innerHTML = url;
+            elem.innerHTML = "msg";
+
+            client.getEthBalance().then((resp) => {
               document.getElementById("celar-balance").innerHTML = `${resp.freeBalance} Wei`;
             })
-
           }).catch((e) => {
-            const elem = document.getElementById("deposit-tx");
-            elem.textContent = JSON.stringify(e)
+            elem.innerHTML = JSON.stringify(e)
           }).finally(() => {
             hideLoader();
           })
@@ -182,7 +183,7 @@
         const data = await getData();
         const client = getClient(data.fromAddress);
 
-        addDepositCallback(client);
+        addSendCallback(client);
 
         //
         const capacityWei = data.sumInWei;

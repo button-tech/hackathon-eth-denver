@@ -183,13 +183,11 @@
             elem.href = url;
             elem.innerHTML = url;
 
-            const balance = client.getEthBalance().then((resp) => {
+            client.getEthBalance().then((resp) => {
               document.getElementById("celar-balance").innerHTML = `${resp.freeBalance} Wei`;
             })
-
           }).catch((e) => {
-            const elem = document.getElementById("deposit-tx");
-            elem.textContent = JSON.stringify(e)
+            elem.innerHTML = JSON.stringify(e)
           }).finally(() => {
             hideLoader();
           })
