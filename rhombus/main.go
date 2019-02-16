@@ -1,7 +1,7 @@
 package main
 
 import (
-	"./server"
+	"github.com/button-tech/hackathon-eth-denver/rhombus/server"
 )
 
 func main() {
