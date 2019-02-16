@@ -19,32 +19,23 @@
     <div class="container">
         <div class="row">
             <div id="main" class="col-12 my-auto">
-                <div style="display: flex; justify-content: center;margin-bottom: 30px">
-                    <img src="https://www.ethdenver.com/wp-content/uploads/2018/12/celer-logo.png" width="300"
-                         height="95">
-                </div>
-
                 <div class="col-12">
                     <div style="display: flex; flex-direction: column; align-items: center">
-                        <strong style="color: black" id="channel-status"></strong>
-                        <a id="src-address" href=""></a>
-                        <div id="channel-capacity"></div>
+                        <strong style="color: black">Open Celer Channel</strong>
+                        <div>0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</div>
+                        <div>Channel capasity: 0.25</div>
                     </div>
 
-                    <br>
+                    <br/>
+
                     <table class="table table-hover table-dark">
 
                         <tbody>
                         <tr>
-                            <th scope="col">Deposit amount</th>
-                            <th id="deposit-amount" scope="col"></th>
+                            <th scope="col">Your Address</th>
+                            <th id="src-address" scope="col">0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</th>
                         </tr>
                         </tbody>
-
-                    </table>
-
-                    <!--
-                    <table class="table table-hover table-dark">
 
                         <tbody>
                         <tr>
@@ -61,15 +52,17 @@
                         </tbody>
 
                     </table>
-                    -->
+
                 </div>
+                <br>
 
                 <form>
                     <div class="text-center col-12">
                         <p id="error"></p>
                         <br>
                         <p id="success"></p>
-                        <a class="btn btn-lg btn-warning btn-circle done" id="deposit-btn">Deposit</a>
+                        <a class="btn btn-lg btn-warning btn-circle done" onclick="sendTransaction()">Send
+                            transaction</a>
                         <br>
                         <br>
                     </div>
@@ -177,6 +170,13 @@
           console.log("123");
         });
       });
+
+        function hideLoader() {
+            $("#loader-4").hide();
+        }
+        function showLoader() {
+            $("#loader-4").show();
+        }
     </script>
 </div>
 </body>

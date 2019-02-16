@@ -47,25 +47,26 @@ const ExchangeScene = new WizardScene(
         const fromAddress = user[`${currencyFrom.toLowerCase()}Address`];
         const secondCurrencyAddress = (Object.keys(token.supportedTokens)).indexOf(currencyTo) == -1 ? user[`${currencyTo.toLowerCase()}Address`] : user[`ethereumAddress`];
         console.log(secondCurrencyAddress)
-        const toAddress = await ShapeShift.investment.getExchangeAddress(secondCurrencyAddress, ShapeShift.pairs[currencyFrom.toLowerCase()][currencyTo.toLowerCase()], fromAddress);
+        const toAddress = await ShapeShift.investment.getExchangeAddress(secondCurrencyAddress, ShapeShift.pairs[currencyFrom.toLowerCase()][currencyTo.toLowerCase()], amountFrom, fromAddress);
         const value = JSON.stringify({
             currencyFrom: currencyFrom,
             currencyTo: currencyTo,
             fromUserID: ctx.message.from.id,
             fromAddress: fromAddress,
-            toAddress: toAddress.deposit,
+            toAddress: toAddress.success.deposit,
             amount: amountFrom,
-            // amountInUSD: ctx.session.isToken ? '0.000002' : amountInUsd,
+            receiveAmount: toAddress.success.withdrawalAmount,
+            amountInUSD: await utils.course.convert(utils.currency[currencyFrom].ticker, "USD", amountFrom),
             lifetime: Date.now() + (utils.keyLifeTime * 1000),
         });
 
         const key = guid.create().value;
-        console.log(value)
 
         utils.client.set(key, value, 'EX', utils.keyLifeTime);
 
-        ctx.reply("**First** currency :" + ctx.wizard.state.firstCurrency +"\n**Second** currency: " + ctx.wizard.state.secondCurrency+"\nSum:"
-            + amountFrom, Extra.markup(Keyboard.create_exchange_transaction(key)));
+        ctx.reply("Deposit Sum: "
+            + amountFrom + " " + utils.currency[currencyFrom].ticker+"\nReceive Sum: "
+            + toAddress.success.withdrawalAmount + " " + utils.currency[currencyTo].ticker, Extra.markup(Keyboard.create_exchange_transaction(key)));
 
         return ctx.scene.leave();
     }

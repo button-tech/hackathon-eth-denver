@@ -66,16 +66,9 @@ async function getBalances(ctx) {
     const tokensTickers = Object.keys(token.supportedTokens);
     const tokenAddresses = Object.values(token.supportedTokens);
     const tokenBalances = await rp.getTokenBalance(tokenAddresses, user.ethereumAddress);
+    const btcBalance = await rp.getBTCBalance(user.bitcoinAddress);
     console.log(tokenBalances);
-    // const btcURL = `https://testnet.blockexplorer.com/api/addr/${user.bitcoinAddress}`;
-    // const btcURL = `https://blockexplorer.com/api/addr/1AEHme2G7TfWZp6LRJaziN7RdjrMdrX9VQ`;
-    //
-    // const balanceBTC = await rp({
-    //     method: 'GET',
-    //     uri: btcURL,
-    //     json: true
-    // });
-    let msg = `*Mainnet Ethereum:* ${balanceETHMain/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHMain/1e18)))}$ \n\n*Ropsten Ethereum:* ${balanceETHRopsten/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHRopsten/1e18)))}$\n\n*BTC:*0\n\n`;
+    let msg = `*Mainnet Ethereum:* ${balanceETHMain/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHMain/1e18)))}$ \n\n*Ropsten Ethereum:* ${balanceETHRopsten/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHRopsten/1e18)))}$\n\n*BTC:* ${btcBalance} or ${(Number(await utils.course.convert("BTC", "USD", btcBalance)))}$\n\n`;
     let counter = 0;
     for (let i in tokensTickers) {
         msg += `*${tokensTickers[i]}:* ${Number(tokenBalances[counter])/1e18}\n\n`;

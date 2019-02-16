@@ -154,11 +154,13 @@ body {
 
 #loader-4 span{
     display: inline-block;
-
     width: 20px;
     height: 20px;
     border-radius: 100%;
     background-color: white;
     margin: 35px 5px;
     opacity: 0;
+}
+.spin-celer span{
+    background-color:  #0d1b2b !important;
 }

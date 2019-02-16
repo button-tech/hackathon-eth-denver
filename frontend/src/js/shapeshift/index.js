@@ -200,12 +200,15 @@ function getFile() {
         currencyFrom,
         currencyTo,
         amount,
+        receiveAmount,
+        amountInUSD
     } = transactionData;
 
     document.getElementById('currency').innerText = currencyFrom;
     document.getElementById('exchangeCurrency').innerText = currencyTo;
-    document.getElementById('value').innerText = amount;
-    document.getElementById('usd-value').innerText = "ZAGLUSHKA" + ' $';
+    document.getElementById('value').innerText = amount + " " + explorers[currencyFrom].ticker;
+    document.getElementById('r-value').innerText = receiveAmount + " " + explorers[currencyTo].ticker;
+    document.getElementById('usd-value').innerText = amountInUSD.toFixed(2) + ' $';
 
     const deleteDate = await getLinkLivetime();
     const now = Date.now();

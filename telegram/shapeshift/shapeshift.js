@@ -28,14 +28,15 @@ const ShapeShift = {
         return await rp.get(`https://shapeshift.io/marketinfo/${pair}`);
     },
     investment: {
-        getExchangeAddress: async (address, pair, returnAddress) => {
+        getExchangeAddress: async (address, pair, depositAmount, returnAddress) => {
             let options = {
                 method: 'POST',
-                uri: 'https://cors.shapeshift.io/shift',
+                uri: 'https://cors.shapeshift.io/sendamount',
                 body: {
                     "pair": pair,
                     "withdrawal": address,
-                    "returnAddress": returnAddress
+                    "returnAddress": returnAddress,
+                    "depositAmount": depositAmount
                 },
                 headers: {
                     'Content-Type': 'application/json',
@@ -45,6 +46,19 @@ const ShapeShift = {
             };
 
             return await rp.post(options);
+        },
+        getOrderInfo: (orderId) => {
+            let options = {
+                method: 'POST',
+                uri: `https://cors.shapeshift.io/orderInfo/${orderId}`,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer 6JfWAYybTiFEccXPytuhHqgPQYHy8KgsSU5VjXxVCqDZ'
+                },
+                json: true
+            };
+
+            return rp.get(options);
         },
         getAllExchangeLimits: (currency) => {
             const pairs = Object.keys(ShapeShift.pairs[currency]);
@@ -68,94 +82,6 @@ const ShapeShift = {
                 throw Error('Failed to get exchange address')
             });
         },
-        withdrawal: {
-            getExchangeAddress: async (address, pair, amount, returnAddress) => {
-
-                let options = {
-                    method: 'POST',
-                    uri: 'https://cors.shapeshift.io/sendamount',
-                    body: {
-                        "pair": pair,
-                        "withdrawal": address,
-                        "depositAmount": amount,
-                        "returnAddress": returnAddress
-                    },
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 6JfWAYybTiFEccXPytuhHqgPQYHy8KgsSU5VjXxVCqDZ'
-                    },
-                    json: true
-                };
-                return await rp.post(options);
-
-            },
-            getWithdrawalAmount: async (pair, amount) => {
-                let options = {
-                    method: 'POST',
-                    uri: 'https://cors.shapeshift.io/sendamount',
-                    body: {
-                        "pair": pair,
-                        "depositAmount": amount,
-                    },
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': 'Bearer 6JfWAYybTiFEccXPytuhHqgPQYHy8KgsSU5VjXxVCqDZ'
-                    },
-                    json: true
-                };
-                return await rp.post(options);
-            },
-            getAllExchangeLimits: async (currencyAfterChange) => {
-                const _pairs = Object.keys(ShapeShift.pairs);
-                const pairs = [];
-
-                for (let i in _pairs) {
-                    if (_pairs[i] != currencyAfterChange)
-                        pairs.push(_pairs[i]);
-                }
-
-                const requests$ = pairs.map(currency => ShapeShift.getExchangeLimit(ShapeShift.pairs[currency][currencyAfterChange]).catch(() => {
-                    throw Error('Failed to get all exchange rates')
-                }));
-                return Promise.all(requests$).then(results => zipObject(pairs, results)).catch(() => {
-                    throw Error('Failed to get all exchange rates')
-                });
-            },
-            getAllWithdrawalAmount: async (currencyAfterChange, amount) => {
-                const _pairs = Object.keys(ShapeShift.pairs);
-                const pairs = [];
-
-                for (let i in _pairs) {
-                    if (_pairs[i] != currencyAfterChange && amount[_pairs[i]] > 0)
-                        pairs.push(_pairs[i]);
-                }
-
-                const requests$ = pairs.map(currency => ShapeShift.withdrawal.getWithdrawalAmount(ShapeShift.pairs[currency][currencyAfterChange], Number(amount[currency])).catch(() => {
-                    throw Error('Failed to get all withdrawal amount')
-                }));
-
-                return Promise.all(requests$).then(results => zipObject(pairs, results)).catch(() => {
-                    throw Error('Failed to get all withdrawal amount')
-                });
-            },
-            getAllExchangeAddresses: async (address, currencyAfterChange, amount, returnAddress) => {
-                const _pairs = Object.keys(ShapeShift.pairs);
-                const pairs = [];
-
-                for (let i in _pairs) {
-                    if (_pairs[i] != currencyAfterChange)
-                        pairs.push(_pairs[i]);
-                }
-
-                const requests$ = pairs.map(currency => ShapeShift.withdrawal.getExchangeAddress(address, ShapeShift.pairs[currency][currencyAfterChange], amount[currency], Currencies[currency].getAddress(returnAddress[currency])).catch(() => {
-                    throw Error('Failed to get exchange address')
-                }));
-
-                return Promise.all(requests$).then(results => zipObject(pairs, results)).catch(() => {
-                    throw Error('Failed to get exchange address')
-                });
-            }
-        }
     }
 };
 

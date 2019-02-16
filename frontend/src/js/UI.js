@@ -1,11 +1,13 @@
-const backendURL = 'http://localhost:3000';
+const backendURL = 'http://54.224.129.179:3000';
 
 const explorers = {
     "Ethereum": {
+        "ticker": "ETH",
         "mainnet": 'https://etherscan.io/tx/',
         "testnet": 'https://ropsten.etherscan.io/tx/'
     },
     "Bitcoin": {
+        "ticker": "BTC",
         "mainnet": 'https://www.blockchain.com/btc/tx/',
         "testnet": 'https://live.blockcypher.com/btc-testnet/tx/'
     }
