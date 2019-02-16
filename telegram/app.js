@@ -30,8 +30,10 @@ stage.register(scenes.mainnetBTC);
 stage.register(scenes.ExchangeScene);
 stage.register(scenes.celerDeposit);
 stage.register(scenes.celerWithdraw);
+stage.register(scenes.tokens);
 
 bot.action("mainnet", ctx=>{ctx.scene.enter("mainnetETH")});
+bot.action("tokens", ctx=>{ctx.scene.enter("tokens")});
 bot.action("btc", ctx=>{ctx.scene.enter("mainnetBTC")});
 bot.action("celerDeposit", ctx=>{ctx.scene.enter("celerDeposit")});
 bot.action("celerWithdraw", ctx=>{ctx.scene.enter("celerWithdraw")});
