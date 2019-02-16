@@ -1,0 +1,88 @@
+{
+  "keyboard": {
+    "start": {
+      "button": {
+        "0": "👤 Account",
+        "1": "🖋 Send",
+        "2": "♾️ Exchange",
+        "3":"💎 Celer"
+      },
+      "text": "ℹ️ Main menu"
+    },
+    "account": {
+      "text": "This is your account",
+      "button": {
+        "0": "Addresses",
+        "1": "Balances"
+      }
+    }
+  },
+  "exchange":{
+    "currencies":{
+      "0":"Ethereum",
+      "1":"Bitcoin"
+    }
+  },
+  "inline_keyboard": {
+    "create_wallet": {
+      "text": "Here you can create account",
+      "0": {
+        "button": "🔐 Create wallet",
+        "callback": "http://127.0.0.1:80/create/?create="
+      }
+    },
+    "send_transaction": {
+      "text": "Tap button to sign and send transaction",
+      "0": {
+        "button": "🖋 Send money",
+        "callback": "http://127.0.0.1:80/send/?tx="
+      }
+    },
+    "exchange_transaction": {
+      "text": "Tap button to sign and send transaction",
+      "0": {
+        "button": "🖋 Exchange currency",
+        "callback": "http://127.0.0.1:80/shapeshift/?tx="
+      }
+    },
+    "sendTransaction": {
+      "currency": {
+        "text": "Choose currency",
+        "button": {
+          "0": {
+            "text": "Ethereum",
+            "callback": "Ethereum"
+          }
+        }
+      }
+    },
+    "celer":{
+      "text":"",
+      "deposit":{
+        "button":"💎 Deposit Celer",
+        "callback":"http://127.0.0.1:80/deposit"
+      },
+      "withdraw":{
+        "button":"🚪 Withdraw Celer",
+        "callback":"http://127.0.0.1:80/withdraw"
+      }
+    }
+  },
+  "dialog": {
+    "sendTransaction": {
+      "2": "Enter receiver @nickname or address",
+      "3": "Enter amount of currency (10 or 1$)",
+      "4": "Enter token address"
+    },
+    "exchange":{
+      "0":"Choose FIRST currency to exchange (ETH, BTC)",
+      "1":"What is your FINAL currency",
+      "2":"What SUM you want to exchange?"
+    },
+    "currencys":{
+      "0":"Mainnet Ethereum",
+      "1":"Celer Ethereum"
+    }
+},
+  "back": "❌ Back"
+}

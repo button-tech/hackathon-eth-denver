@@ -1,11 +1,11 @@
-const backendURL = 'http://3.80.224.192:3000';
+const backendURL = 'http://localhost:3000';
 
 const explorers = {
     "Ethereum": {
         "mainnet": 'https://etherscan.io/tx/',
         "testnet": 'https://ropsten.etherscan.io/tx/'
     },
-}
+};
 
 function CloseAlert(arg) {
     switch (arg) {
@@ -43,7 +43,7 @@ function addError(errorText) {
             </div>
         </div>
     </div>`;
-    close_loader();
+    closeLoader();
 }
 
 function addHint(errorText) {
@@ -61,11 +61,10 @@ function addHint(errorText) {
             </div>
         </div>
     </div>`;
-    close_loader();
+    closeLoader();
 }
 
 function addSuccess(successText) {
-    // CloseAlert(0);
     document.getElementById('success').innerHTML += `
     <div class="alert alert-success col-12" id="Success_pop">
         <div class="row">

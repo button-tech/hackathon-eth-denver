@@ -60,14 +60,15 @@ async function sendTransaction() {
 
         const transactionData = await getTransactionData();
         let {
-            toAddress,
+            currencyFrom,
             amount,
+            toAddress
         } = transactionData;
 
         let transactionHash;
 
         amount = tw(amount).toNumber();
-        let rawTx = (await BL.signTransaction(decryptedData['Ethereum'], toAddress, amount));
+        let rawTx = (await BL.signTransaction(decryptedData[currencyFrom], toAddress, amount));
         transactionHash = await BL.sendSigned(rawTx);
         console.log(transactionHash);
         // }
@@ -188,20 +189,15 @@ function getFile() {
 (async function setTransactionData() {
     const transactionData = await getTransactionData();
     let {
-        currency,
-        fromAddress,
-        toAddress,
-        toNickname,
+        currencyFrom,
+        currencyTo,
         amount,
-        amountInUSD
     } = transactionData;
 
-    document.getElementById('currency').innerText = currency;
-    document.getElementById('from').innerText = fromAddress;
-    document.getElementById('to').innerText = toAddress;
-    document.getElementById('nickname').innerText = toNickname;
+    document.getElementById('currency').innerText = currencyFrom;
+    document.getElementById('exchangeCurrency').innerText = currencyTo;
     document.getElementById('value').innerText = amount;
-    document.getElementById('usd-value').innerText = amountInUSD + ' $';
+    document.getElementById('usd-value').innerText = "ZAGLUSHKA" + ' $';
 
     const deleteDate = await getLinkLivetime();
     const now = Date.now();

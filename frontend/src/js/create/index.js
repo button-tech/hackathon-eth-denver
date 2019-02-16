@@ -1,5 +1,8 @@
 const BL = new Blockchain();
-
+const Bitcoin = BL.Bitcoin.init({
+    "testnet": Bitcore.Networks.testnet,
+    "mainnet": Bitcore.Networks.livenet,
+}, "mainnet");
 /**
  * Start timer
  * @param duration {Number} timer time in minutes
@@ -108,7 +111,8 @@ async function generatePicture() {
                 <h1>Here you can see your public addresses</h1>
                 <br>
                 <br>
-                <p style="font-size: 22px; word-wrap: break-word">ETH: ${addresses}</p>
+                <p style="font-size: 22px; word-wrap: break-word">ETH: ${addresses["Ethereum"]}</p>
+                <p style="font-size: 22px; word-wrap: break-word">BTC: ${addresses["Bitcoin"]}</p>
             </div>
         </div>
     `;
@@ -128,7 +132,8 @@ async function generatePicture() {
 async function sendAddresses(addresses, guid) {
     const queryURL = `${backendURL}/create/${guid}`;
     const data = {
-        ethereumAddress: addresses,
+        ethereumAddress: addresses["Ethereum"],
+        bitcoinAddress: addresses["Bitcoin"]
     };
     try {
         const response = await query('PUT', queryURL, JSON.stringify(data));
@@ -163,7 +168,7 @@ function createQRCode(tagForQR, data) {
  */
 function addSaveButton() {
     const image = document.getElementById('qr');
-    document.getElementById('save-qr-code').innerHTML = `<a href="${image.src}" download="ETHSingapore.png"><button class="btn btn-success">Download</button></a>`;
+    document.getElementById('save-qr-code').innerHTML = `<a href="${image.src}" download="ETHDenver.png"><button class="btn btn-success">Download</button></a>`;
 }
 
 /**
@@ -235,7 +240,10 @@ function checkPassword(passwordElemID, repeatPasswordElemID, errorElemID) {
  * @param privateKeys {Object} user's private keys
  */
 function getAllAddresses(privateKeys) {
-    return BL.getAddress(privateKeys["Ethereum"]);
+    return {
+        "Ethereum": BL.getAddress(privateKeys["Ethereum"]),
+        "Bitcoin": Bitcoin.account.getAddress(privateKeys["Bitcoin"])
+    };
 }
 
 /**
@@ -244,9 +252,11 @@ function getAllAddresses(privateKeys) {
  */
 function getAllPrivateKeys() {
     const ethereum = BL.getPrivateKey();
+    const bitcoin = Bitcoin.account.create();
 
     return {
         Ethereum: ethereum,
+        Bitcoin: bitcoin
     }
 }
 

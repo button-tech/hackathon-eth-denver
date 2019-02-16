@@ -1,0 +1,27 @@
+FROM node
+
+WORKDIR /app
+
+COPY . .
+
+RUN rm -rf node_modules/
+RUN npm update
+RUN export NODE_PATH=node modules
+RUN npm i
+
+ENV BOT_TOKEN=
+ENV URL=
+ENV LOGIN=
+ENV PASSWORD=
+ENV DB=
+ENV INFURA_TOKEN=
+ENV REDIS_HOST=
+
+EXPOSE 3000
+EXPOSE 6379
+EXPOSE 27017
+EXPOSE 8545
+
+ENTRYPOINT ["node", "app.js"]
+
+
