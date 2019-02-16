@@ -1,8 +1,8 @@
 package ethereum
 
 import (
-	"./contract"
 	"fmt"
+	"github.com/button-tech/hackathon-eth-denver/rhombus/ethereum/contract"
 	"github.com/ethereum/go-ethereum/common"
 	"github.com/ethereum/go-ethereum/ethclient"
 	"math"

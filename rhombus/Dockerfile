@@ -5,6 +5,11 @@ WORKDIR /app
 
 RUN go get github.com/gin-gonic/gin
 RUN go get github.com/ethereum/go-ethereum
+RUN go get github.com/alecthomas/template
+RUN go get github.com/gin-gonic/contrib/cors
+RUN go get github.com/swaggo/gin-swagger
+RUN go get github.com/button-tech/hackathon-eth-denver/rhombus
+RUN go get github.com/swaggo/gin-swagger/swaggerFiles
 RUN go get github.com/ethereum/go-ethereum/accounts/abi
 RUN go get github.com/ethereum/go-ethereum/accounts/abi/bind
 RUN go get github.com/ethereum/go-ethereum/common
