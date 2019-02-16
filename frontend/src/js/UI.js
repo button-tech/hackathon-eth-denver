@@ -1,4 +1,4 @@
-const backendURL = 'http://ethergram.tk:3000';
+const backendURL = 'https://ethergram.tk/api';
 
 const explorers = {
     "Ethereum": {
