@@ -13,7 +13,8 @@
 
 3. We use [ShapeShift](https://shapeshift.io/#/coins) to allow you to exchange ETH to other cryptocurrencies
 
-4. We use [Rhombus](https://kauri.io/article/74ed99544dc34542afccb51ac7532d3f/v3/rhombus-sponsor-bounty-at-ethdenver-2019!) to have exchange rate ETH/USD
+4. We use [Rhombus](https://kauri.io/article/74ed99544dc34542afccb51ac7532d3f/v3/rhombus-sponsor-bounty-at-ethdenver-2019!) to have exchange rates (Example: http://ethergram.tk/rate/usd-btc)
+
 
 # Project Tagline/Description 
 Telegram client to send and swap crypto secure via @nickname! 
