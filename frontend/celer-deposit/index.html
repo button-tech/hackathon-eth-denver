@@ -196,6 +196,17 @@
         });
       }
 
+       function parseURL(url) {
+           try {
+               const params = url.search.substring(1);
+               const paramsObject = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+               return paramsObject;
+           } catch (e) {
+               addError('Can not get user identifier. Please, go back to the bot and try again');
+               throw e;
+           }
+       }
+
       $(document).ready(async function () {
 
         const data = await getData();
