@@ -42,6 +42,7 @@ async function getTokenBalance(tokenAddress, userAddress) {
 }
 
 async function getRhombusExchangeRate(firstCurrency, secondCurrency) {
+    console.log(`http://ethergram.tk:8080/rate/${tickers[firstCurrency][secondCurrency]}`)
     return (await rp.get(`http://ethergram.tk:8080/rate/${tickers[firstCurrency][secondCurrency]}`)).rate;
 }
 

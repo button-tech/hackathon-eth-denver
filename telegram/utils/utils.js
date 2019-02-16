@@ -40,6 +40,7 @@ const course = {
      */
     convert: async (from, to, value) => {
         const rate = await reqs.getRhombusExchangeRate(from, to);
+        console.log(rate)
         const result = Number(value) * Number(rate);
         return result
     }
