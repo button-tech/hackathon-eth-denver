@@ -2,8 +2,8 @@ window.account1 = "49ca2717e582e4037fe4c07eacf6ca3933a8f62d";
 window.account2 = "90c8c14e90353730b605cd37231f3021bbfdc741";
 
 window.eth2celarhost = {
-  "49ca2717e582e4037fe4c07eacf6ca3933a8f62d": "http://localhost:30000",
-  "90c8c14e90353730b605cd37231f3021bbfdc741": "http://localhost:30001"
+  "49ca2717e582e4037fe4c07eacf6ca3933a8f62d": "https://ethergram.tk/c0",
+  "90c8c14e90353730b605cd37231f3021bbfdc741": "https://ethergram.tk/c1"
 };
 
 function getClient(ethAddress) {
