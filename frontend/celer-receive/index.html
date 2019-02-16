@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="../../src/styles/bootstrap.min.css">
+    <link rel="stylesheet" href="../../src/styles/send/custom.css">
+    <title>Ethergram</title>
+</head>
+<body id="container">
+
+<div class="container">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="row">
+            <div id="main" class="col-12 my-auto">
+                <div style="display: flex; justify-content: center;margin-bottom: 30px">
+                    <img src="https://www.ethdenver.com/wp-content/uploads/2018/12/celer-logo.png" width="300"
+                         height="95">
+                </div>
+
+                <div class="col-12">
+                    <div style="display: flex; flex-direction: column; align-items: center">
+                        <strong style="color: black" id="channel-status"></strong>
+                        <a id="src-address" href=""></a>
+                        <div id="channel-capacity"></div>
+                    </div>
+
+                    <br>
+                    <table class="table table-hover table-dark">
+
+                        <tbody>
+                        <tr>
+                            <th scope="col">Celar Balance</th>
+                            <th id="celar-balance" scope="col"></th>
+                        </tr>
+                        </tbody>
+
+                        <tbody>
+                        <tr>
+                            <th scope="col">Deposit amount</th>
+                            <th id="deposit-amount" scope="col"></th>
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div class="col-12 bg" style="display: flex; justify-content: center">
+                    <a class="btn btn-lg btn-warning btn-circle done" id="deposit-btn">Deposit</a>
+                    <a id="deposit-tx"></a>
+                    <div style="display: none" class="loader-spin spin-celer" id="loader-4">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="display: none" class="alert alert-success col-12" id="Success_pop">
+            <div class="row">
+                <div class="col-10">
+                    <h2>Success</h2>
+                    <h5>You are done</h5>
+                </div>
+                <div class="col-2">
+                    <button type="button" class="close" onclick="CloseAlert(1)">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../src/js/celer/index.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="../src/js/utils/popper.min.js"></script>
+    <script src="../src/js/utils/bootstrap.min.js"></script>
+    <script src="../src/js/UI.js"></script>
+
+    <script src="../src/js/celer/browser.js"></script>
+    <script src="../src/js/celer/index.js"></script>
+
+    <script type="text/javascript">
+      function getData() {
+        return getTxData()
+      }
+
+      async function getTxData() {
+        const shortlink = getShortlink();
+        try {
+          const queryURL = `${backendURL}/transaction/${shortlink}`;
+          const response = await query('GET', queryURL);
+          console.log(response)
+          if (response.error == null)
+            return response.result;
+          else {
+            throw response.error;
+          }
+        } catch (e) {
+          addError('Can not get transaction properties');
+        }
+      }
+
+      function getShortlink() {
+        const demand = ['tx'];
+        const url = window.location;
+        const urlData = parseURL(url);
+
+        demand.forEach((property) => {
+          if (urlData[property] === undefined) {
+            throw new Error('URL doesn\'t contain all properties');
+          }
+        });
+
+        return urlData.tx;
+      }
+
+
+      function hideLoader() {
+        $("#loader-4").hide();
+      }
+
+      function showLoader() {
+        $("#loader-4").show();
+      }
+
+      function parseURL(url) {
+        try {
+          const params = url.search.substring(1);
+          const paramsObject = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+          return paramsObject;
+        } catch (e) {
+          throw e;
+        }
+      }
+
+      $(document).ready(async function () {
+
+        const data = await getData();
+        const client = getClient(data.fromAddress);
+
+        // https://ropsten.etherscan.io/address/0x5b1c9da212a4031f1188d520105196989c82678b
+        const openChannelMsgElem = document.getElementById("channel-status");
+        let cid = "";
+        try {
+          cid = await client.openEthChannel(0, 0)
+        }
+        catch (e) {
+          openChannelMsgElem.innerHTML = JSON.stringify(e);
+          return;
+        }
+
+        openChannelMsgElem.innerHTML = `Channel Is Open`;
+        const accountLinkElem = document.getElementById("src-address");
+        accountLinkElem.innerHTML = '0x' + data.fromAddress.toUpperCase();
+        accountLinkElem.href = 'https://ropsten.etherscan.io/address/0x' + data.fromAddress;
+        document.getElementById("channel-capacity").innerHTML = `Channel Id: ${cid}`;
+
+
+        showLoader();
+        let lastBalance = null;
+
+        const intervalId = setInterval(async () => {
+          const balance = (await client.getEthBalance()).freeBalance;
+          if (lastBalance != null && lastBalance !== balance) {
+            clearInterval(intervalId);
+            hideLoader();
+          }
+
+          lastBalance = balance;
+        }, 1000);
+      });
+    </script>
+</div>
+</body>
+</html>
