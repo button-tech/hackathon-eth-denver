@@ -19,7 +19,7 @@ bot.start((ctx) => Handlers.start(ctx));
 bot.hears(Text.keyboard.start.button["0"], (ctx) => Handlers.goToAccount(ctx));
 bot.hears(Text.keyboard.start.button["1"], (ctx) => Handlers.sendTx(ctx));
 bot.hears(Text.keyboard.start.button["2"], (ctx) => ctx.scene.enter("ExchangeScene"));
-bot.hears(Text.keyboard.start.button["3"], (ctx)=>Handlers.celerChange(ctx));
+bot.hears(Text.keyboard.start.button["3"], (ctx)=> Handlers.celerChange(ctx));
 bot.hears(Text.keyboard.account.button["0"], (ctx) => Handlers.getAddresses(ctx));
 bot.hears(Text.keyboard.account.button["1"], (ctx) => Handlers.getBalances(ctx));
 
@@ -28,10 +28,13 @@ bot.hears(Text.back, (ctx) => Handlers.back(ctx));
 stage.register(scenes.mainnetETH);
 stage.register(scenes.mainnetBTC);
 stage.register(scenes.ExchangeScene);
+stage.register(scenes.celerDeposit);
+stage.register(scenes.celerWithdraw);
 
 bot.action("mainnet", ctx=>{ctx.scene.enter("mainnetETH")});
 bot.action("btc", ctx=>{ctx.scene.enter("mainnetBTC")});
-bot.action("celar", ctx=>{ctx.scene.enter("mainnetETH")});
+bot.action("celerDeposit", ctx=>{ctx.scene.enter("celerDeposit")});
+bot.action("celerWithdraw", ctx=>{ctx.scene.enter("celerWithdraw")});
 
 bot.startPolling();
 
