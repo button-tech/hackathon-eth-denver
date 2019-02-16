@@ -65,6 +65,10 @@
       "withdraw":{
         "button":"🚪 Withdraw Celer",
         "callback":"https://ethergram.tk/celer/withdraw/?tx="
+      },
+      "send": {
+        "button":"Send Celer",
+        "callback":"https://ethergram.tk/celer-send/?tx="
       }
     }
   },

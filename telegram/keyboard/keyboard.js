@@ -41,6 +41,11 @@ const create_transaction  = (guid) => Markup.inlineKeyboard([
     // Markup.callbackButton('Back', 'delete')
 ]);
 
+const celer_send  = (guid) => Markup.inlineKeyboard([
+    Markup.urlButton(Text.inline_keyboard.celer.send.button, `${Text.inline_keyboard.celer.send.callback}${guid}`),
+    // Markup.callbackButton('Back', 'delete')
+]);
+
 const celer_deposit = (guid) => Markup.inlineKeyboard([
     Markup.urlButton(Text.inline_keyboard.celer.deposit.button, `${Text.inline_keyboard.celer.deposit.callback}${guid}`),
     // Markup.callbackButton('Back', 'delete')
@@ -66,6 +71,7 @@ module.exports = {
     txVariants:txVariants,
     celerInline:celerInline,
     celer_deposit: celer_deposit,
-    celer_withdraw: celer_withdraw
+    celer_withdraw: celer_withdraw,
+    celer_send: celer_send
 };
 

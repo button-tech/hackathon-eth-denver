@@ -31,6 +31,7 @@ stage.register(scenes.ExchangeScene);
 stage.register(scenes.celerDeposit);
 stage.register(scenes.celerWithdraw);
 stage.register(scenes.tokens);
+stage.register(scenes.ropstenETH);
 
 bot.action("mainnet", ctx=>{ctx.scene.enter("mainnetETH")});
 bot.action("tokens", ctx=>{ctx.scene.enter("tokens")});
