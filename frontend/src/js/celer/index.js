@@ -2,8 +2,8 @@ window.account1 = "49ca2717e582e4037fe4c07eacf6ca3933a8f62d";
 window.account2 = "90c8c14e90353730b605cd37231f3021bbfdc741";
 
 window.eth2celarhost = {
-  "49ca2717e582e4037fe4c07eacf6ca3933a8f62d": "https://197fe617.ngrok.io",
-  "90c8c14e90353730b605cd37231f3021bbfdc741": "https://b924d2af.ngrok.io"
+  "49ca2717e582e4037fe4c07eacf6ca3933a8f62d": "http://localhost:30000",
+  "90c8c14e90353730b605cd37231f3021bbfdc741": "http://localhost:30001"
 };
 
 function getClient(ethAddress) {
