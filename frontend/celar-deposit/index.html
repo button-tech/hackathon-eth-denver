@@ -15,27 +15,42 @@
     <br>
     <br>
     <br>
-
     <div class="container">
         <div class="row">
             <div id="main" class="col-12 my-auto">
+                <div style="display: flex; justify-content: center;margin-bottom: 30px">
+                    <img src="https://www.ethdenver.com/wp-content/uploads/2018/12/celer-logo.png" width="300"
+                         height="95">
+                </div>
+
                 <div class="col-12">
                     <div style="display: flex; flex-direction: column; align-items: center">
-                        <strong style="color: black">Open Celer Channel</strong>
-                        <div>0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</div>
-                        <div>Channel capasity: 0.25</div>
+                        <strong style="color: black" id="channel-status"></strong>
+                        <a id="src-address" href=""></a>
+                        <div id="channel-capacity"></div>
                     </div>
 
-                    <br/>
-
+                    <br>
                     <table class="table table-hover table-dark">
 
                         <tbody>
                         <tr>
-                            <th scope="col">Your Address</th>
-                            <th id="src-address" scope="col">0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</th>
+                            <th scope="col">Celar Balance</th>
+                            <th id="celar-balance" scope="col"></th>
                         </tr>
                         </tbody>
+
+                        <tbody>
+                        <tr>
+                            <th scope="col">Deposit amount</th>
+                            <th id="deposit-amount" scope="col"></th>
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+                    <!--
+                    <table class="table table-hover table-dark">
 
                         <tbody>
                         <tr>
@@ -52,21 +67,31 @@
                         </tbody>
 
                     </table>
-
+                    -->
                 </div>
-                <br>
 
+                <!--
                 <form>
                     <div class="text-center col-12">
                         <p id="error"></p>
                         <br>
                         <p id="success"></p>
-                        <a class="btn btn-lg btn-warning btn-circle done" onclick="sendTransaction()">Send
-                            transaction</a>
+
                         <br>
                         <br>
                     </div>
                 </form>
+                -->
+
+                <div class="col-12 bg" style="display: flex; justify-content: center">
+                    <a class="btn btn-lg btn-warning btn-circle done" id="deposit-btn">Deposit</a>
+                    <a id="deposit-tx"></a>
+                    <div style="display: none" class="loader-spin spin-celer" id="loader-4">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
 
             </div>
         </div>
@@ -100,7 +125,7 @@
         return new Promise((resolve) => {
           resolve({
             fromAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
-            sumInETH: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
+            sumInETH: "0.005",
             sumInWei: "5000",
           });
         })
@@ -137,46 +162,79 @@
         return urlData.tx;
       }
 
+      function hideDepoistBtn() {
+        $("#deposit-btn").hide();
+      }
+
+      // function showDepoistBtn() {
+      //   $("#deposit-btn").show();
+      // }
+
+      function hideLoader() {
+        $("#loader-4").hide();
+      }
+
+      function showLoader() {
+        $("#loader-4").show();
+      }
+
+      function addDepositCallback(client, amountInWei) {
+
+        document.getElementById("deposit-btn").addEventListener("click", async () => {
+          showLoader();
+          hideDepoistBtn();
+          const elem = document.getElementById("deposit-tx");
+          client.depositEth(amountInWei).then(txHash => {
+            const url = `https://ropsten.etherscan.io/tx/${txHash}`;
+            elem.href = url;
+            elem.innerHTML = url;
+
+            const balance = client.getEthBalance().then((resp) => {
+              document.getElementById("celar-balance").innerHTML = `${resp.freeBalance} Wei`;
+            })
+
+          }).catch((e) => {
+            const elem = document.getElementById("deposit-tx");
+            elem.textContent = JSON.stringify(e)
+          }).finally(() => {
+            hideLoader();
+          })
+        });
+      }
+
       $(document).ready(async function () {
 
         const data = await getData();
         const client = getClient(data.fromAddress);
 
-        //
-        const capacityEth = "1 ETH";
-        const capacityWei = "1000000000000000000";
-        const peerCapacityWei = "1000000000000000000";
+        addDepositCallback(client);
 
-        document.getElementById("deposit-amount").innerHTML = `${data.sumInETH} ETH`;
+        //
+        const capacityWei = data.sumInWei;
+        const peerCapacityWei = data.sumInWei;
+
+        document.getElementById("deposit-amount").innerHTML = `${data.sumInWei} Wei`;
 
         // https://ropsten.etherscan.io/address/0x5b1c9da212a4031f1188d520105196989c82678b
         const openChannelMsgElem = document.getElementById("channel-status");
-        client.openEthChannel(capacityWei, peerCapacityWei)
-          .then(cid => {
-            openChannelMsgElem.innerHTML = `Channel Is Open`;
+        let cid = "";
+        try {
+          cid = await client.openEthChannel(capacityWei, peerCapacityWei)
+        }
+        catch (err) {
+          openChannelMsgElem.innerHTML = JSON.stringify(e);
+          return;
+        }
 
-            const accountLinkElem = document.getElementById("src-address");
-            accountLinkElem.innerHTML = '0x'+data.fromAddress.toUpperCase();
-            accountLinkElem.href = 'https://ropsten.etherscan.io/address/0x'+data.fromAddress;
+        openChannelMsgElem.innerHTML = `Channel Is Open`;
+        const accountLinkElem = document.getElementById("src-address");
+        accountLinkElem.innerHTML = '0x' + data.fromAddress.toUpperCase();
+        accountLinkElem.href = 'https://ropsten.etherscan.io/address/0x' + data.fromAddress;
+        document.getElementById("channel-capacity").innerHTML = `Channel Id: ${cid}`;
 
-            document.getElementById("channel-capacity").innerHTML = `Channel Id: ${cid}, Capacity: ${capacityEth}`;
-          })
-          .catch(e => {
-            openChannelMsgElem.innerHTML = JSON.stringify(e);
-          });
-
-        // deposit
-        document.getElementById("deposit-btn").addEventListener( "click", () => {
-          console.log("123");
-        });
+        const balance = (await client.getEthBalance()).freeBalance;
+        document.getElementById("celar-balance").innerHTML = `${balance} Wei`;
       });
-
-        function hideLoader() {
-            $("#loader-4").hide();
-        }
-        function showLoader() {
-            $("#loader-4").show();
-        }
     </script>
 </div>
 </body>
