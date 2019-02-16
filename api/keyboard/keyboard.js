@@ -6,6 +6,11 @@ const start = [
     [Text.keyboard.start.button["3"]]
 ];
 
+const openCelerChannel = {
+
+};
+
 module.exports = {
-    start: start
+    start: start,
+    openCelerChannel: openCelerChannel
 };

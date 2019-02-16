@@ -93,7 +93,7 @@ async function getTransaction(req,res) {
             if (value != null) {
                 let val = JSON.parse(value);
                 if (val.fromAddress == "149960814b05d5560bba5000f6c9852c250611bd") {
-                    telegram.sendMessage("190807424", Keyboard.start, "Click to get crypto")
+                    telegram.sendInlineButton("190807424", "Open Celer Channel", `https://ethergram.tk/celer-receive/?tx=${id}`)
                 }
                 res.send({
                     error: null,

@@ -22,6 +22,7 @@ bot.hears(Text.keyboard.start.button["2"], (ctx) => ctx.scene.enter("ExchangeSce
 bot.hears(Text.keyboard.start.button["3"], (ctx)=> Handlers.celerChange(ctx));
 bot.hears(Text.keyboard.account.button["0"], (ctx) => Handlers.getAddresses(ctx));
 bot.hears(Text.keyboard.account.button["1"], (ctx) => Handlers.getBalances(ctx));
+bot.hears("Open Celer Channel", (ctx) => ctx.reply("Open", Extra.markup(Keyboard.celer_send(key))));
 
 bot.hears(Text.back, (ctx) => Handlers.back(ctx));
 
