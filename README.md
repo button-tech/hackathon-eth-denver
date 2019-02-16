@@ -41,7 +41,7 @@ Telegram client to send and swap crypto secure via @nickname!
 That's a secure messenger client to make transactions which is super easy to use. You don't need to download anything and you can send transactions via @nickname. We were inspired by WeChat payments. We build it not only on ETH but also on BTC and second layer of ETH called Celer Network. That's mean - very low fees and fast payments!
 
 # Describe your tech stack (e.g., protocols, languages, API’s, etc.)
-We use NodeJs, Redis, MongoDB and JS on the Frontend.
+We use NodeJs, Redis, MongoDB and JS on the Frontend and Golang microservice
 
 # Track for which you’re submitting (Open or Impact)
 Open
