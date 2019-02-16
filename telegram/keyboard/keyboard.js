@@ -67,6 +67,5 @@ module.exports = {
     celerInline:celerInline,
     celer_deposit: celer_deposit,
     celer_withdraw: celer_withdraw
-
 };
 
