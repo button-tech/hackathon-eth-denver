@@ -164,6 +164,16 @@
         });
       }
 
+      function parseURL(url) {
+          try {
+              const params = url.search.substring(1);
+              const paramsObject = JSON.parse('{"' + decodeURI(params).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}');
+              return paramsObject;
+          } catch (e) {
+              throw e;
+          }
+      }
+
       $(document).ready(async function () {
 
         const data = await getData();
@@ -172,10 +182,10 @@
         addSendCallback(client);
 
         //
-        const capacityWei = data.sumInWei;
-        const peerCapacityWei = data.sumInWei;
+        const capacityWei = (data.amount*10**18).toFixed();
+        const peerCapacityWei = (data.amount*10**18).toFixed();
 
-        document.getElementById("amount-to-send").innerHTML = `${data.sumInWei} Wei`;
+        document.getElementById("amount-to-send").innerHTML = `${(data.amount*10**18).toFixed()} Wei`;
         document.getElementById("dst-address").innerHTML = `${data.toAddress}`;
 
         // https://ropsten.etherscan.io/address/0x5b1c9da212a4031f1188d520105196989c82678b
@@ -184,7 +194,7 @@
         try {
           cid = await client.openEthChannel(capacityWei, peerCapacityWei)
         }
-        catch (err) {
+        catch (e) {
           openChannelMsgElem.innerHTML = JSON.stringify(e);
           return;
         }
