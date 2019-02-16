@@ -220,8 +220,62 @@ const mainnetBTC = new WizardScene(
     }
 );
 
+const celerDeposit = new WizardScene(
+    "celerDeposit", ctx => {
+        ctx.reply("Enter sum in ETH");
+        return ctx.wizard.next()
+    },
+    async ctx => {
+        const amount = Number(ctx.message.text);
+        const user = await db.user.find.oneByID(ctx.message.from.id);
+        const fromAddress = user[`ethereumAddress`];
+
+        const key = guid.create().value;
+
+        const value = JSON.stringify({
+            sumInETH: amount,
+            sumInWei: (amount*10**18).toFixed(),
+            fromAddress: fromAddress
+        });
+
+        utils.client.set(key, value, 'EX', utils.keyLifeTime);
+        console.log(value);
+        ctx.reply(Text.inline_keyboard.celer.deposit.button, Extra.markup(Keyboard.celer_deposit(key)));
+
+        return ctx.scene.leave();
+    }
+);
+
+const celerWithdraw = new WizardScene(
+    "celerWithdraw", ctx => {
+        ctx.reply("Enter sum in ETH");
+        return ctx.wizard.next()
+    },
+    async ctx => {
+        const amount = Number(ctx.message.text);
+        const user = await db.user.find.oneByID(ctx.message.from.id);
+        const fromAddress = user[`ethereumAddress`];
+
+        const key = guid.create().value;
+
+        const value = JSON.stringify({
+            sumInETH: amount,
+            sumInWei: (amount*10**18).toFixed(),
+            fromAddress: fromAddress
+        });
+
+        utils.client.set(key, value, 'EX', utils.keyLifeTime);
+        console.log(value);
+        ctx.reply(Text.inline_keyboard.celer.withdraw.button, Extra.markup(Keyboard.celer_withdraw(key)));
+
+        return ctx.scene.leave();
+    }
+);
+
 module.exports = {
     ExchangeScene:ExchangeScene,
     mainnetETH:mainnetETH,
-    mainnetBTC: mainnetBTC
+    mainnetBTC: mainnetBTC,
+    celerDeposit: celerDeposit,
+    celerWithdraw: celerWithdraw
 };

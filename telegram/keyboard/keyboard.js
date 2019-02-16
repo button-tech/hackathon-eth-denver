@@ -27,8 +27,8 @@ const txVariants = Markup.inlineKeyboard([
 ]).extra();
 
 const celerInline = ()=> Markup.inlineKeyboard([
-    Markup.urlButton(Text.inline_keyboard.celer.deposit.button, `${Text.inline_keyboard.celer.deposit.callback}`),
-    Markup.urlButton(Text.inline_keyboard.celer.withdraw.button, `${Text.inline_keyboard.celer.withdraw.callback}`)
+    Markup.callbackButton(Text.inline_keyboard.celer.deposit.button, `celerDeposit`),
+    Markup.callbackButton(Text.inline_keyboard.celer.withdraw.button, `celerWithdraw`)
 ]);
 
 const create_wallet = (guid) => Markup.inlineKeyboard([
@@ -36,8 +36,18 @@ const create_wallet = (guid) => Markup.inlineKeyboard([
     // Markup.callbackButton('Back', 'delete')
 ]);
 
-const create_transaction = (guid) => Markup.inlineKeyboard([
+const create_transaction  = (guid) => Markup.inlineKeyboard([
     Markup.urlButton(Text.inline_keyboard.send_transaction["0"].button, `${Text.inline_keyboard.send_transaction["0"].callback}${guid}`),
+    // Markup.callbackButton('Back', 'delete')
+]);
+
+const celer_deposit = (guid) => Markup.inlineKeyboard([
+    Markup.urlButton(Text.inline_keyboard.celer.deposit.button, `${Text.inline_keyboard.celer.deposit.callback}${guid}`),
+    // Markup.callbackButton('Back', 'delete')
+]);
+
+const celer_withdraw = (guid) => Markup.inlineKeyboard([
+    Markup.urlButton(Text.inline_keyboard.celer.withdraw.button, `${Text.inline_keyboard.celer.withdraw.callback}${guid}`),
     // Markup.callbackButton('Back', 'delete')
 ]);
 
@@ -55,5 +65,8 @@ module.exports = {
     exchange:exchange,
     txVariants:txVariants,
     celerInline:celerInline,
+    celer_deposit: celer_deposit,
+    celer_withdraw: celer_withdraw
+
 };
 
