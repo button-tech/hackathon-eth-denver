@@ -19,23 +19,32 @@
     <div class="container">
         <div class="row">
             <div id="main" class="col-12 my-auto">
+                <div style="display: flex; justify-content: center;margin-bottom: 30px">
+                    <img src="https://www.ethdenver.com/wp-content/uploads/2018/12/celer-logo.png" width="300"
+                         height="95">
+                </div>
+
                 <div class="col-12">
                     <div style="display: flex; flex-direction: column; align-items: center">
-                        <strong style="color: black">Open Celer Channel</strong>
-                        <div>0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</div>
-                        <div>Channel capasity: 0.25</div>
+                        <strong style="color: black" id="channel-status"></strong>
+                        <a id="src-address" href=""></a>
+                        <div id="channel-capacity"></div>
                     </div>
 
-                    <br/>
-
+                    <br>
                     <table class="table table-hover table-dark">
 
                         <tbody>
                         <tr>
-                            <th scope="col">Your Address</th>
-                            <th id="src-address" scope="col">0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</th>
+                            <th scope="col">Deposit amount</th>
+                            <th id="deposit-amount" scope="col"></th>
                         </tr>
                         </tbody>
+
+                    </table>
+
+                    <!--
+                    <table class="table table-hover table-dark">
 
                         <tbody>
                         <tr>
@@ -52,17 +61,15 @@
                         </tbody>
 
                     </table>
-
+                    -->
                 </div>
-                <br>
 
                 <form>
                     <div class="text-center col-12">
                         <p id="error"></p>
                         <br>
                         <p id="success"></p>
-                        <a class="btn btn-lg btn-warning btn-circle done" onclick="sendTransaction()">Send
-                            transaction</a>
+                        <a class="btn btn-lg btn-warning btn-circle done" id="deposit-btn">Deposit</a>
                         <br>
                         <br>
                     </div>
@@ -96,54 +103,80 @@
     <script src="../src/js/celer/index.js"></script>
 
     <script type="text/javascript">
-        async function getData() {
-            return await getTxData();
-                // fromAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
-                // toAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
-                // amount: "0.005",
-                // sumInDollars: "5",
+      async function getData() {
+        return new Promise((resolve) => {
+          resolve({
+            fromAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
+            sumInETH: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
+            sumInWei: "5000",
+          });
+        })
+      }
+
+      async function getTxData() {
+        const shortlink = getShortlink();
+        try {
+          const queryURL = `${backendURL}/celerdeposit/${shortlink}`;
+          const response = await query('GET', queryURL);
+          console.log(response)
+          if (response.error == null)
+            return response.result;
+          else {
+            throw response.error;
+          }
+        } catch (e) {
+          addError('Can not get transaction properties');
         }
+      }
 
-        async function getTxData() {
-            const shortlink = getShortlink();
-            try {
-                const queryURL = `${backendURL}/celerdeposit/${shortlink}`;
-                const response = await query('GET', queryURL);
-                console.log(response)
-                if (response.error == null)
-                    return response.result;
-                else {
-                    throw response.error;
-                }
-            } catch (e) {
-                addError('Can not get transaction properties');
-            }
-        }
-        function getShortlink() {
-            const demand = ['tx'];
-            const url = window.location;
-            const urlData = parseURL(url);
+      function getShortlink() {
+        const demand = ['tx'];
+        const url = window.location;
+        const urlData = parseURL(url);
 
-            demand.forEach((property) => {
-                if (urlData[property] === undefined) {
-                    addError('Transaction do not contains all parameters');
-                    throw new Error('URL doesn\'t contain all properties');
-                }
-            });
-
-            return urlData.tx;
-        }
-
-        $(document).ready(function () {
-
-            //document.getElementById("address").innerHTML = address.toUpperCase();
-            // openChannel(client1, 'c1', channelCapacity);
-            //
-            // openChannel().then(
-            //
-            // )
-
+        demand.forEach((property) => {
+          if (urlData[property] === undefined) {
+            addError('Transaction do not contains all parameters');
+            throw new Error('URL doesn\'t contain all properties');
+          }
         });
+
+        return urlData.tx;
+      }
+
+      $(document).ready(async function () {
+
+        const data = await getData();
+        const client = getClient(data.fromAddress);
+
+        //
+        const capacityEth = "1 ETH";
+        const capacityWei = "1000000000000000000";
+        const peerCapacityWei = "1000000000000000000";
+
+        document.getElementById("deposit-amount").innerHTML = `${data.sumInETH} ETH`;
+
+        // https://ropsten.etherscan.io/address/0x5b1c9da212a4031f1188d520105196989c82678b
+        const openChannelMsgElem = document.getElementById("channel-status");
+        client.openEthChannel(capacityWei, peerCapacityWei)
+          .then(cid => {
+            openChannelMsgElem.innerHTML = `Channel Is Open`;
+
+            const accountLinkElem = document.getElementById("src-address");
+            accountLinkElem.innerHTML = '0x'+data.fromAddress.toUpperCase();
+            accountLinkElem.href = 'https://ropsten.etherscan.io/address/0x'+data.fromAddress;
+
+            document.getElementById("channel-capacity").innerHTML = `Channel Id: ${cid}, Capacity: ${capacityEth}`;
+          })
+          .catch(e => {
+            openChannelMsgElem.innerHTML = JSON.stringify(e);
+          });
+
+        // deposit
+        document.getElementById("deposit-btn").addEventListener( "click", () => {
+          console.log("123");
+        });
+      });
     </script>
 </div>
 </body>

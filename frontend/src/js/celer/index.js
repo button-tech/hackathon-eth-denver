@@ -11,17 +11,6 @@ function getClient(ethAddress) {
   return new celer.Client(host);
 }
 
-function openChannel(client, elemId, capasity) {
-  const elem = document.getElementById(elemId);
-  client.openEthChannel(capasity, capasity)
-    .then(cid => {
-      elem.textContent = `channel is opened, cid =  ${cid}, capasisty = ${capasity}, peerCapasity = ${capasity}`
-    })
-    .catch(e => {
-      elem.textContent = JSON.stringify(e);
-    });
-}
-
 function depositEth(client, amount) {
   return client.depositEth(amount);
   // return new Promise(function (resolve, reject) {
