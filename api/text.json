@@ -28,21 +28,21 @@
       "text": "Here you can create account",
       "0": {
         "button": "🔐 Create wallet",
-        "callback": "http://127.0.0.1:80/create/?create="
+        "callback": "http://54.224.129.179:80/create/?create="
       }
     },
     "send_transaction": {
       "text": "Tap button to sign and send transaction",
       "0": {
         "button": "🖋 Send money",
-        "callback": "http://127.0.0.1:80/send/?tx="
+        "callback": "http://54.224.129.179:80/send/?tx="
       }
     },
     "exchange_transaction": {
       "text": "Tap button to sign and send transaction",
       "0": {
         "button": "🖋 Exchange currency",
-        "callback": "http://127.0.0.1:80/shapeshift/?tx="
+        "callback": "http://54.224.129.179:80/shapeshift/?tx="
       }
     },
     "sendTransaction": {
@@ -60,11 +60,11 @@
       "text":"",
       "deposit":{
         "button":"💎 Deposit Celer",
-        "callback":"http://127.0.0.1:80/deposit"
+        "callback":"http://54.224.129.179:80/deposit"
       },
       "withdraw":{
         "button":"🚪 Withdraw Celer",
-        "callback":"http://127.0.0.1:80/withdraw"
+        "callback":"http://54.224.129.179:80/withdraw"
       }
     }
   },
