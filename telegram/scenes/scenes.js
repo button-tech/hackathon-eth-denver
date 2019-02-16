@@ -302,7 +302,7 @@ const celerDeposit = new WizardScene(
     async ctx => {
         const amount = Number(ctx.message.text);
         const user = await db.user.find.oneByID(ctx.message.from.id);
-        const fromAddress = user[`ethereumAddress`];
+        const fromAddress = user[`ropstenAddress`];
 
         const key = guid.create().value;
 

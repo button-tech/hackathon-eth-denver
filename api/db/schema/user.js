@@ -16,6 +16,10 @@ const User = new Schema({
         type: String,
         default: ''
     },
+    ropstenAddress: {
+        type: String,
+        default: ''
+    },
     bitcoinAddress: {
         type: String,
         default: ''
