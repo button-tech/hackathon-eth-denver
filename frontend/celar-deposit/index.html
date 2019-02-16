@@ -21,7 +21,7 @@
             <div id="main" class="col-12 my-auto">
                 <div class="col-12">
                     <div style="display: flex; flex-direction: column; align-items: center">
-                        <strong style="color: black" >Open Celer Channel</strong>
+                        <strong style="color: black">Open Celer Channel</strong>
                         <div>0xEBBE63C83D4A3B942FC03566684FFE3D6CAE5F05</div>
                         <div>Channel capasity: 0.25</div>
                     </div>
@@ -96,25 +96,54 @@
     <script src="../src/js/celer/index.js"></script>
 
     <script type="text/javascript">
-      function getData() {
-        return {
-          fromAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
-          toAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
-          amount: "0.005",
-          sumInDollars: "5",
+        async function getData() {
+            return await getTxData();
+                // fromAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
+                // toAddress: "49ca2717e582e4037fe4c07eacf6ca3933a8f62d",
+                // amount: "0.005",
+                // sumInDollars: "5",
         }
-      }
 
-      $(document).ready(function () {
+        async function getTxData() {
+            const shortlink = getShortlink();
+            try {
+                const queryURL = `${backendURL}/celerdeposit/${shortlink}`;
+                const response = await query('GET', queryURL);
+                console.log(response)
+                if (response.error == null)
+                    return response.result;
+                else {
+                    throw response.error;
+                }
+            } catch (e) {
+                addError('Can not get transaction properties');
+            }
+        }
+        function getShortlink() {
+            const demand = ['tx'];
+            const url = window.location;
+            const urlData = parseURL(url);
 
-        //document.getElementById("address").innerHTML = address.toUpperCase();
-        // openChannel(client1, 'c1', channelCapacity);
-        //
-        // openChannel().then(
-        //
-        // )
+            demand.forEach((property) => {
+                if (urlData[property] === undefined) {
+                    addError('Transaction do not contains all parameters');
+                    throw new Error('URL doesn\'t contain all properties');
+                }
+            });
 
-      });
+            return urlData.tx;
+        }
+
+        $(document).ready(function () {
+
+            //document.getElementById("address").innerHTML = address.toUpperCase();
+            // openChannel(client1, 'c1', channelCapacity);
+            //
+            // openChannel().then(
+            //
+            // )
+
+        });
     </script>
 </div>
 </body>
