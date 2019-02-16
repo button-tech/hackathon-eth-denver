@@ -1,5 +1,6 @@
 const rp = require('request-promise');
 const redis = require("redis");
+const reqs = require("./../request/request");
 const Web3 = require('web3');
 require('dotenv').config();
 
@@ -38,8 +39,7 @@ const course = {
      * @returns {Promise<number>}
      */
     convert: async (from, to, value) => {
-        const courses = await course.getCourse(from);
-        const rate = courses[to];
+        const rate = await reqs.getRhombusExchangeRate(from, to);
         const result = Number(value) * Number(rate);
         return result
     }
