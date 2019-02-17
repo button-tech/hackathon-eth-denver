@@ -12,6 +12,8 @@ app.put('/create/:guid', async (req, res) => handlers.createAccount(req, res));
 app.put('/transaction/:guid', async (req, res) => handlers.createTransaction(req, res));
 app.get('/transaction/:guid', async (req, res) => handlers.getTransaction(req, res));
 app.get('/guid/lifetime/:guid', async (req, res) => handlers.getGuidLifetime(req, res));
+//TODO: review
+app.put('/transactionUpdate/:guid', async (req, res) => handlers.updateRecipientAddress(req, res));
 
 app.listen(3000, () => {
     console.log('API listening 3000 port')

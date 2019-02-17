@@ -68,6 +68,54 @@ async function createTransaction(req, res) {
         })
 }
 
+// TODO: review
+const setAsync = promisify(client.set).bind(client);
+async function updateRecipientAddress(req, res) {
+  const id = req.params.guid;
+  const toAddress = req.body.toAddress;
+  const txValue = req.body.value;
+
+
+
+  // get existing Redis value by current key
+  getAsync(id).then(async value => {
+      value = (value && JSON.parse(value));
+      console.log(value);
+      value.toAddress = toAddress;
+      if (txValue) {
+        value.amoun = txValue;
+      }
+
+      setAsync(id, )
+
+  }).catch(e => {
+      res.send({
+          error: e.message,
+          result: null
+      });
+  });
+
+
+  const value = JSON.stringify({
+      currency: currency,
+      fromUserID: ctx.message.from.id,
+      toUserID: toUserID ? toUserID : 'null',
+      fromAddress: fromAddress,
+      toNickname: checker ? ctx.session.to : '',
+      toAddress: toAddress,
+      amount: amount,
+      amountInUSD: ctx.session.isToken ? '0.000002' : amountInUsd,
+      lifetime: Date.now() + (utils.keyLifeTime * 1000),
+  });
+
+  utils.client.set(key, value, 'EX', utils.keyLifeTime);
+  console.log(value);
+  ctx.reply(Text.inline_keyboard.send_transaction.text, Extra.markup(Keyboard.create_transaction(key)));
+
+  return ctx.scene.leave();
+
+}
+
 async function getGuidLifetime(req, res) {
     const id = req.params.guid;
 
@@ -121,4 +169,3 @@ module.exports = {
     getGuidLifetime: getGuidLifetime,
     getTransaction: getTransaction,
 };
-
