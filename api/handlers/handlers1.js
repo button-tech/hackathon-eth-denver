@@ -9,6 +9,8 @@ const {promisify} = require('util');
 const getAsync = promisify(client.get).bind(client);
 const Keyboard = require('./../keyboard/keyboard');
 
+const keyLifeTime = 600; // in seconds
+
 async function createAccount(req, res) {
     const id = req.params.guid;
     const ethereumAddress = req.body.ethereumAddress;
@@ -72,10 +74,8 @@ async function createTransaction(req, res) {
 const setAsync = promisify(client.set).bind(client);
 async function updateRecipientAddress(req, res) {
   const id = req.params.guid;
-  const toAddress = req.body.toAddress;
+  const toAddress = req.body.toAddress || "";
   const txValue = req.body.value;
-
-
 
   // get existing Redis value by current key
   getAsync(id).then(async value => {
@@ -83,10 +83,17 @@ async function updateRecipientAddress(req, res) {
       console.log(value);
       value.toAddress = toAddress;
       if (txValue) {
-        value.amoun = txValue;
+        value.amount = txValue;
       }
 
-      setAsync(id, )
+      client.set(id, value, 'EX', keyLifeTime);
+
+      console.log(value);
+
+     res.send({
+       result: "OK",
+       error: null
+     })
 
   }).catch(e => {
       res.send({
@@ -94,26 +101,6 @@ async function updateRecipientAddress(req, res) {
           result: null
       });
   });
-
-
-  const value = JSON.stringify({
-      currency: currency,
-      fromUserID: ctx.message.from.id,
-      toUserID: toUserID ? toUserID : 'null',
-      fromAddress: fromAddress,
-      toNickname: checker ? ctx.session.to : '',
-      toAddress: toAddress,
-      amount: amount,
-      amountInUSD: ctx.session.isToken ? '0.000002' : amountInUsd,
-      lifetime: Date.now() + (utils.keyLifeTime * 1000),
-  });
-
-  utils.client.set(key, value, 'EX', utils.keyLifeTime);
-  console.log(value);
-  ctx.reply(Text.inline_keyboard.send_transaction.text, Extra.markup(Keyboard.create_transaction(key)));
-
-  return ctx.scene.leave();
-
 }
 
 async function getGuidLifetime(req, res) {
@@ -168,4 +155,5 @@ module.exports = {
     createTransaction: createTransaction,
     getGuidLifetime: getGuidLifetime,
     getTransaction: getTransaction,
+    updateRecipientAddress: updateRecipientAddress
 };
