@@ -113,6 +113,12 @@ async function exchange(ctx) {
     const currencyTo = cur[data[indexOfSecondCurrency]];
     const amountFrom = data[indexOfDepositAmount];
 
+    const { minimum, maxLimit } = await ShapeShift.getExchangeLimit(ShapeShift.pairs[currencyFrom.toLowerCase()][currencyTo.toLowerCase()]);
+    if (Number(minimum) > Number(amountFrom) || Number(amountFrom) > Number(maxLimit)) {
+        ctx.reply("Faild because of ShapeShift limits");
+        return ctx.scene.leave();
+    }
+
     const user = await db.user.find.oneByID(ctx.message.from.id);
     const fromAddress = user[`${currencyFrom.toLowerCase()}Address`];
     const secondCurrencyAddress = (Object.keys(token.supportedTokens)).indexOf(currencyTo) == -1 ? user[`${currencyTo.toLowerCase()}Address`] : user[`ethereumAddress`];
