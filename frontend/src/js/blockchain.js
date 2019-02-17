@@ -79,7 +79,7 @@ async function signTransaction(privateKey, to, value, data, gas = []) {
             value: _values[i],
             from: addresses[i],
             data: data,
-            gasPrice: tbn(await web3.eth.getGasPrice()).times(1.3).toNumber(),
+            gasPrice: tbn(await web3.eth.getGasPrice()).times(1.3).integerValue().toNumber(),
             gas: gas[i] ? gas[i] : 21000
         };
         const tx = new ethereumjs.Tx(txParam);
