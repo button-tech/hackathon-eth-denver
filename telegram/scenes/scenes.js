@@ -222,16 +222,17 @@ const tokenDAI = new WizardScene(
 
 const tokenBuffio = new WizardScene(
     "bufficoin", ctx=>{
-        ctx.reply(Text.dialog.sendTokens.buffio["0"]);
+        ctx.session.currency = 'BUFF';
+        ctx.reply(Text.dialog.sendTokens.dai["0"]);
         return ctx.wizard.next()
     },
     ctx => {
         ctx.session.to = ctx.message.text;
-        ctx.reply(Text.dialog.sendTokens.buffio["1"]);
+        ctx.reply(Text.dialog.sendTokens.dai["1"]);
         return ctx.wizard.next()
     },
     async ctx => {
-        const tickerFrom = "ETH";
+        const tickerFrom = "BUFF";
         const currency = ctx.session.currency;
         let amount;
         let amountInUsd;
