@@ -86,7 +86,7 @@ async function updateRecipientAddress(req, res) {
         value.amount = txValue;
       }
 
-      client.set(id, value, 'EX', keyLifeTime);
+      client.set(id, JSON.stringify(value), 'EX', keyLifeTime);
 
       console.log(value);
 
