@@ -18,4 +18,4 @@ EXPOSE 3000
 EXPOSE 6379
 EXPOSE 27017
 
-CMD ["while true; do node app.js && break; done"]
+ENTRYPOINT ["node", "api.js"]
