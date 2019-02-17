@@ -41,5 +41,7 @@ bot.action("celerDeposit", ctx=>{ctx.scene.enter("celerDeposit")});
 bot.action("celerWithdraw", ctx=>{ctx.scene.enter("celerWithdraw")});
 bot.action("celer", ctx=>{ctx.scene.enter("ropstenETH")});
 
+bot.command("exchange", ctx=> Handlers.exchange(ctx));
+
 bot.startPolling();
 
