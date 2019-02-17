@@ -212,7 +212,7 @@ async function send(ctx) {
         fromUserID: ctx.message.from.id,
         toUserID: toUserID ? toUserID : 'null',
         fromAddress: fromAddress,
-        toNickname: checker ? ctx.session.to : '',
+        toNickname: checker ? userTo : '',
         toAddress: toAddress,
         amount: amount,
         amountInUSD: amountInUsd,
