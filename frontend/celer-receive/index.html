@@ -35,8 +35,8 @@
 
                         <tbody>
                         <tr>
-                            <th scope="col">Celar Balance</th>
-                            <th id="celar-balance" scope="col"></th>
+                            <th scope="col">Celer Balance</th>
+                            <th id="celer-balance" scope="col"></th>
                         </tr>
                         </tbody>
 
@@ -166,12 +166,12 @@
           if (lastBalance != null && lastBalance !== balance) {
             clearInterval(intervalId);
             hideLoader();
-            document.getElementById("celar-balance").innerHTML = balance;
+            document.getElementById("celer-balance").innerHTML = balance;
           }
 
-          document.getElementById("celar-balance").innerHTML = balance;
+          document.getElementById("celer-balance").innerHTML = balance;
           lastBalance = balance;
-          
+
         }, 1000);
       });
     </script>
