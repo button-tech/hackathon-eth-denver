@@ -38,6 +38,10 @@ function sendTx(ctx) {
     return ctx.reply("Change", Keyboard.txVariants)
 }
 
+function scanQr(ctx) {
+    return ctx.reply("🔬Scan QR", Keyboard.inlinePay)
+}
+
 function celerChange(ctx) {
     return ctx.reply(Text.inline_keyboard.celer.text, Extra.markup(Keyboard.celerInline()))
 }
@@ -250,5 +254,6 @@ module.exports = {
     celerChange:celerChange,
     exchange: exchange,
     send: send,
-    tokens:tokens
+    tokens:tokens,
+    scanQr: scanQr
 };

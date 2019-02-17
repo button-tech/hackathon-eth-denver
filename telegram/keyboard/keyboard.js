@@ -5,10 +5,14 @@ const guid = require('guid');
 
 const start = [
     [Text.keyboard.start.button["0"],  Text.keyboard.start.button["1"]],
-    [Markup.urlButton("🐃 BUFF QR", `https://dazzling-gates-70947e.netlify.com?tx=${guid.create().value}`)],
+    ["🐃 BUFF QR"],
     [Text.keyboard.start.button["2"]],
     [Text.keyboard.start.button["3"]]
 ];
+
+const inlinePay = Markup.inlineKeyboard([
+    Markup.urlButton("🐃 BUFF QR", `https://dazzling-gates-70947e.netlify.com?tx=${guid.create().value}`)
+]).extra();
 
 const account = [
     [Text.keyboard.account.button["0"]],
@@ -84,6 +88,7 @@ module.exports = {
     celer_deposit: celer_deposit,
     celer_withdraw: celer_withdraw,
     celer_send: celer_send,
-    tokensVariant: tokensVariant
+    tokensVariant: tokensVariant,
+    inlinePay: inlinePay
 };
 
