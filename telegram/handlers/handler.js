@@ -103,7 +103,7 @@ async function exchange(ctx) {
         "BTC": "Bitcoin",
         "ETH": "Ethereum"
     };
-
+    return;
     if (Object.keys(cur).indexOf(data[indexOfFirstCurrency]) == -1 || Object.keys(cur).indexOf(data[indexOfSecondCurrency]) == -1) {
         ctx.reply("Incorrect");
         return ctx.scene.leave();
