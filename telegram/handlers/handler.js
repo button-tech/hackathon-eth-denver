@@ -113,7 +113,7 @@ async function exchange(ctx) {
     const currencyTo = cur[data[indexOfSecondCurrency]];
     const amountFrom = data[indexOfDepositAmount];
 
-    const { minimum, maxLimit } = await ShapeShift.getExchangeLimit(ShapeShift.pairs[currencyFrom.toLowerCase()][currencyTo.toLowerCase()]);
+    const { minimum, maxLimit } = JSON.parse(await ShapeShift.getExchangeLimit(ShapeShift.pairs[currencyFrom.toLowerCase()][currencyTo.toLowerCase()]));
     if (Number(minimum) > Number(amountFrom) || Number(amountFrom) > Number(maxLimit)) {
         ctx.reply("Faild because of ShapeShift limits");
         return ctx.scene.leave();
