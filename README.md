@@ -4,6 +4,10 @@
 
 # [Try us here](https://t.me/ethergram_bot)
 
+[![IMAGE ALT TEXT HERE](http://img.youtube.com/vi/g_ykqcLywh4/3.jpg)](https://www.youtube.com/watch?v=g_ykqcLywh4)
+
+# [Video](https://www.youtube.com/watch?v=g_ykqcLywh4)
+
 # What is it?
 
 ### It's a Telegram app that allows to:
@@ -48,7 +52,11 @@ Open
 
 # All Bounties Completed/Incorporated
 Rhombus Network - We use exchange rate from ETH to USD and BTC to USD to send crypto.
+
 Celer Network - We use payment channel.
+
 ShapeShift - We allow users to make a swap from BTC to ETC and back
+
 POA Network - Use xDai and Bufficon token in Telegram!
 
+MakerDAO - Use DAI token in Telegram!
