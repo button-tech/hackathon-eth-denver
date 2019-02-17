@@ -38,10 +38,10 @@ function sendTx(ctx) {
     return ctx.reply("Change", Keyboard.txVariants)
 }
 
-function scanQr(ctx) {
+async function scanQr(ctx) {
     const key = guid.create().value;
     utils.client.set(key, JSON.stringify({
-        fromAddress: ctx.message.from.id,
+        fromAddress: (await db.user.find.oneByID(ctx.message.from.id)).ethereumAddress,
         toNickname: '',
     }), 'EX', utils.keyLifeTime);
     return ctx.reply("🔬Scan QR", Keyboard.inlinePay(key));
