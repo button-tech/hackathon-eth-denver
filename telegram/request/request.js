@@ -46,6 +46,10 @@ async function getRhombusExchangeRate(firstCurrency, secondCurrency) {
     return JSON.parse(await rp.get(`http://ethergram.tk:8080/rate/${tickers[secondCurrency][firstCurrency]}`)).rate;
 }
 
+async function getBuffBalance(userAddress) {
+    return JSON.parse(await rp.get(`http://localhost:9090/balance/${userAddress}`));
+}
+
 async function getBTCBalance(userAddress) {
     return JSON.parse(await rp.get(`https://insight.bitpay.com/api/addr/${userAddress}`)).balance;
 }
@@ -53,5 +57,6 @@ async function getBTCBalance(userAddress) {
 module.exports = {
     getTokenBalance: getTokenBalance,
     getBTCBalance: getBTCBalance,
-    getRhombusExchangeRate: getRhombusExchangeRate
+    getRhombusExchangeRate: getRhombusExchangeRate,
+    getBuffBalance: getBuffBalance
 };

@@ -3,6 +3,7 @@ docker rm -f $(docker ps -a -q)
 docker pull neojt/mredis
 
 docker run -p 8080:8080 -d rhombus
+docker run -p 9090:9090 -d erage/buffdai
 
 docker run -d -p 6379:6379 neojt/mredis
 
