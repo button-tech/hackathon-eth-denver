@@ -47,7 +47,7 @@ async function getRhombusExchangeRate(firstCurrency, secondCurrency) {
 }
 
 async function getBuffBalance(userAddress) {
-    return JSON.parse(await rp.get(`http://localhost:9090/balance/${userAddress}`));
+    return JSON.parse(await rp.get(`http://127.0.0.1:9090/balance/${userAddress}`)).balance;
 }
 
 async function getBTCBalance(userAddress) {
