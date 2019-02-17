@@ -93,11 +93,11 @@ async function sendTransaction() {
             );
             amount = tw(amount).toNumber();
             const instance = getInstance(ABI, ADDRESSES["BUFF"]);
-            transactionHash = (await BL.set(instance, 'transfer', decryptedData["Ethereum"], 0, [toAddress, amount]));
+            transactionHash = (await BL.set(instance, 'transfer', decryptedData["Ethereum"], 0, [toAddress, Number(amount)]));
         } else {
             amount = tw(amount).toNumber();
             const instance = getInstance(ABI, ADDRESSES[currency]);
-            transactionHash = (await BL.set(instance, 'transfer', decryptedData["Ethereum"], 0, [toAddress, amount]));
+            transactionHash = (await BL.set(instance, 'transfer', decryptedData["Ethereum"], 0, [toAddress, Number(amount)]));
         }
 
         console.log(transactionHash);
