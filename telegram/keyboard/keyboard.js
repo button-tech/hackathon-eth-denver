@@ -25,7 +25,7 @@ const txVariants = Markup.inlineKeyboard([
         [Markup.callbackButton("Mainnet Bitcoin","btc")],
         [Markup.callbackButton("Mainnet xDai","xdai")],
         [Markup.callbackButton("Celer Ethereum","celer")],
-        [Markup.callbackButton("ETH tokens","tokensChange")]
+        [Markup.callbackButton("Tokens","tokensChange")]
     ]).extra();
 
 
