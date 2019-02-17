@@ -23,6 +23,7 @@ const exchange = [
 const txVariants = Markup.inlineKeyboard([
         [Markup.callbackButton("Mainnet Ethereum","mainnet")],
         [Markup.callbackButton("Mainnet Bitcoin","btc")],
+        [Markup.callbackButton("Mainnet xDai","xdai")],
         [Markup.callbackButton("Celer Ethereum","celer")]
     ]).extra();
 
