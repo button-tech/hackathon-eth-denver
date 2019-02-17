@@ -75,7 +75,7 @@ async function getBalances(ctx) {
     `*Ropsten Ethereum:* ${balanceETHRopsten/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHRopsten/1e18)))}$\n\n`+
     `*BTC:* ${btcBalance} or ${(Number(await utils.course.convert("BTC", "USD", btcBalance)))}$\n\n`+
     `*xDAI:* ${balanceXDai/1e18} or ${(Number(await utils.course.convert("XDAI", "USD", balanceXDai/1e18)))}$\n\n`+
-    `*BUFF:* ${buffBalance} or ${Number(buffBalance)}$\n\\n`;
+    `*BUFF:* ${buffBalance} or ${Number(buffBalance)}$\n\n`;
     let counter = 0;
     for (let i in tokensTickers) {
         msg += `*${tokensTickers[i]}:* ${Number(tokenBalances[counter])/1e18}\n\n`;
