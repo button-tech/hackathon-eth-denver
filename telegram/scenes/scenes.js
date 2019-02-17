@@ -238,10 +238,10 @@ const tokenBuffio = new WizardScene(
         let amountInUsd;
         if (ctx.message.text.indexOf("$") >= 0) {
             amountInUsd = ctx.message.text.substring(0, ctx.message.text.length-1);
-            amount = (Number(await utils.course.convert("USD", tickerFrom, amountInUsd)));
+            amount = amountInUsd;
         } else {
             amount = ctx.message.text;
-            amountInUsd = 1;
+            amountInUsd = amount;
         }
         console.log(amountInUsd);
         const key = guid.create().value;
