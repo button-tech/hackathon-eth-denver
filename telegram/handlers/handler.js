@@ -94,6 +94,7 @@ async function getBalance(tokenAddress, address) {
 async function exchange(ctx) {
     const allString = ctx.message.text;
     const data = allString.split(' ');
+    console.log(data);
     const indexOfFirstCurrency = 1;
     const indexOfSecondCurrency = 2;
     const indexOfDepositAmount = 3;
