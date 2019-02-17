@@ -148,6 +148,7 @@ const mainnetETH = new WizardScene(
 
 const tokenDAI = new WizardScene(
    "dai", ctx=>{
+        ctx.session.currency = 'DAI';
         ctx.reply(Text.dialog.sendTokens.dai["0"]);
         return ctx.wizard.next()
     },
@@ -157,7 +158,7 @@ const tokenDAI = new WizardScene(
             return ctx.wizard.next()
         },
         async ctx => {
-            const tickerFrom = "ETH";
+            const tickerFrom = "DAI";
             const currency = ctx.session.currency;
             let amount;
             let amountInUsd;
