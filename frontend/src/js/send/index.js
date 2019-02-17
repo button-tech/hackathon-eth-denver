@@ -83,6 +83,7 @@ async function sendTransaction() {
             window.web3 =  new Web3(
                 new Web3.providers.HttpProvider('https://dai.poa.network/')
             );
+            const BL = new Blockchain();
             amount = tw(amount).toNumber();
             let rawTx = (await BL.signTransaction(decryptedData["Ethereum"], toAddress, amount));
             transactionHash = await BL.sendSigned(rawTx);
