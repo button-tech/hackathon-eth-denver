@@ -105,7 +105,7 @@ async function exchange(ctx) {
     };
 
     const currencyFrom = cur[data[indexOfFirstCurrency]];
-    const currencyTo = [data[indexOfSecondCurrency]];
+    const currencyTo = cur[data[indexOfSecondCurrency]];
     const amountFrom = data[indexOfDepositAmount];
 
     console.log(currencyFrom, currencyTo, amountFrom);
