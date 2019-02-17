@@ -1,13 +1,13 @@
 window.account1 = "149960814b05d5560bba5000f6c9852c250611bd";
 window.account2 = "f6cdf7cdc1d804765c481d03ce0e545d073219d9";
 
-window.eth2celarhost = {
+window.eth2celerhost = {
   "149960814b05d5560bba5000f6c9852c250611bd": "https://ethergram.tk/c0",
   "f6cdf7cdc1d804765c481d03ce0e545d073219d9": "https://ethergram.tk/c1"
 };
 
 function getClient(ethAddress) {
-  const host = eth2celarhost[ethAddress];
+  const host = eth2celerhost[ethAddress];
   return new celer.Client(host);
 }
 

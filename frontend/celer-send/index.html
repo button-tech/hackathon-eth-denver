@@ -35,8 +35,8 @@
 
                         <tbody>
                         <tr>
-                            <th scope="col">Celar Balance</th>
-                            <th id="celar-balance" scope="col"></th>
+                            <th scope="col">Celer Balance</th>
+                            <th id="celer-balance" scope="col"></th>
                         </tr>
                         </tbody>
 
@@ -154,7 +154,7 @@
             elem.innerHTML = "Payment was sent";
 
             client.getEthBalance().then((resp) => {
-              document.getElementById("celar-balance").innerHTML = `${resp.freeBalance} Wei`;
+              document.getElementById("celer-balance").innerHTML = `${resp.freeBalance} Wei`;
             })
           }).catch((e) => {
             elem.innerHTML = JSON.stringify(e)
@@ -206,7 +206,7 @@
         document.getElementById("channel-capacity").innerHTML = `Channel Id: ${cid}`;
 
         const balance = (await client.getEthBalance()).freeBalance;
-        document.getElementById("celar-balance").innerHTML = `${balance} Wei`;
+        document.getElementById("celer-balance").innerHTML = `${balance} Wei`;
       });
     </script>
 </div>
