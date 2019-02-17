@@ -153,6 +153,10 @@ async function send(ctx) {
     const allString = ctx.message.text;
     const data = allString.split(' ');
     console.log(data);
+    if (data.length != 4) {
+        ctx.reply("Incorrect");
+        return ctx.scene.leave();
+    }
     const indexOfCurrency = 1;
     const indexOfReceiver = 2;
     const indexOfAmount = 3;
