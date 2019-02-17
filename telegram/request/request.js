@@ -5,7 +5,7 @@ const tickers = {
         "ETH": "usd-eth",
         "XDAI": "usd-xdai",
         "DAI": "usd-dai",
-        "BTC": "usd-btc"
+        "BTC": "usd-btc",
     },
     "ETH": {
         "USD": "eth-usd",

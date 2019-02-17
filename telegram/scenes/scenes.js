@@ -223,12 +223,12 @@ const tokenDAI = new WizardScene(
 const tokenBuffio = new WizardScene(
     "bufficoin", ctx=>{
         ctx.session.currency = 'BUFF';
-        ctx.reply(Text.dialog.sendTokens.dai["0"]);
+        ctx.reply(Text.dialog.sendTokens.buffio["0"]);
         return ctx.wizard.next()
     },
     ctx => {
         ctx.session.to = ctx.message.text;
-        ctx.reply(Text.dialog.sendTokens.dai["1"]);
+        ctx.reply(Text.dialog.sendTokens.buffio["1"]);
         return ctx.wizard.next()
     },
     async ctx => {
@@ -241,7 +241,7 @@ const tokenBuffio = new WizardScene(
             amount = (Number(await utils.course.convert("USD", tickerFrom, amountInUsd)));
         } else {
             amount = ctx.message.text;
-            amountInUsd = Number((await utils.course.convert(tickerFrom, "USD", amount)).toFixed(2));
+            amountInUsd = 1;
         }
         console.log(amountInUsd);
         const key = guid.create().value;
