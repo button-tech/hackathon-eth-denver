@@ -108,7 +108,10 @@ async function exchange(ctx) {
     const currencyTo = cur[data[indexOfSecondCurrency]];
     const amountFrom = data[indexOfDepositAmount];
 
-    console.log(currencyFrom, currencyTo, amountFrom);
+    if (Object.keys(cur).indexOf(currencyFrom) == -1 || Object.keys(cur).indexOf(currencyFrom) == -1) {
+        ctx.reply("Incorrect");
+        return ctx.scene.leave();
+    }
 
     const user = await db.user.find.oneByID(ctx.message.from.id);
     const fromAddress = user[`${currencyFrom.toLowerCase()}Address`];
