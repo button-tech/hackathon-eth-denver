@@ -572,7 +572,6 @@ module.exports = {
     mainnetBTC: mainnetBTC,
     celerDeposit: celerDeposit,
     celerWithdraw: celerWithdraw,
-    tokens: tokens,
     ropstenETH: ropstenETH,
     mainnetxdai: mainnetxdai,
     tokenBuffio:tokenBuffio,
