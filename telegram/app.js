@@ -30,10 +30,9 @@ stage.register(scenes.mainnetBTC);
 stage.register(scenes.ExchangeScene);
 stage.register(scenes.celerDeposit);
 stage.register(scenes.celerWithdraw);
-stage.register(scenes.tokens);
 stage.register(scenes.ropstenETH);
 stage.register(scenes.mainnetxdai);
-stage.register(scenes.tokensCustom);
+// stage.register(scenes.tokensCustom);
 stage.register(scenes.tokenBuffio);
 stage.register(scenes.tokenDAI);
 
