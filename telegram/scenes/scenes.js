@@ -474,7 +474,7 @@ const mainnetxdai = new WizardScene(
         }
 
         const value = JSON.stringify({
-            currency: currency,
+            currency: "xDAI",
             fromUserID: ctx.message.from.id,
             toUserID: toUserID ? toUserID : 'null',
             fromAddress: fromAddress,

@@ -79,6 +79,13 @@ async function sendTransaction() {
             amount = Number((amount * 10 ** 8).toFixed());
             let rawTx = (await Bitcoin.transactions.signTransaction(decryptedData[currency], toAddress, amount));
             transactionHash = (await Bitcoin.transactions.sendSigned(rawTx)).txid;
+        } else if (currency == 'xDAI') {
+            window.web3 =  new Web3(
+                new Web3.providers.HttpProvider('https://dai.poa.network/')
+            );
+            amount = tw(amount).toNumber();
+            let rawTx = (await BL.signTransaction(decryptedData[currency], toAddress, amount));
+            transactionHash = await BL.sendSigned(rawTx);
         }
 
         console.log(transactionHash);
