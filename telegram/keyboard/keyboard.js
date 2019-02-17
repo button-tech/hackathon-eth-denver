@@ -20,11 +20,11 @@ const exchange = [
 ];
 
 
-const txVariants = Markup.inlineKeyboard(
+const txVariants = Markup.inlineKeyboard([
         [Markup.callbackButton("Mainnet Ethereum","mainnet")],
         [Markup.callbackButton("Mainnet Bitcoin","btc")],
         [Markup.callbackButton("Celer Ethereum","celer")]
-    ).extra();
+    ]).extra();
 
 const celerInline = ()=> Markup.inlineKeyboard([
     Markup.callbackButton(Text.inline_keyboard.celer.deposit.button, `celerDeposit`),
