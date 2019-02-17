@@ -77,30 +77,32 @@ async function updateRecipientAddress(req, res) {
   const toAddress = req.body.toAddress || "";
   const txValue = req.body.value;
 
-  // get existing Redis value by current key
-  getAsync(id).then(async value => {
-      value = (value && JSON.parse(value));
-      console.log(value);
-      value.toAddress = toAddress;
-      if (txValue) {
-        value.amount = txValue;
-      }
+    getAsync(id)
+        .then(async value => {
+                value.currency = "BUFF";
+                value.toAddress = toAddress;
+                value.amount = txValue;
+                value.amountInUSD = txValue;
+                value.lifetime = Date.now() + (keyLifeTime * 1000),
 
-      client.set(id, JSON.stringify(value), 'EX', keyLifeTime);
+                client.set(id, JSON.stringify(value), 'EX', keyLifeTime);
 
-      console.log(value);
+                res.send({
+                    error: null,
+                    result: 'success'
+                });
+            })
+        .catch(e => {
+            res.send({
+                error: e.message,
+                result: null
+            });
+    });
 
-     res.send({
-       result: "OK",
-       error: null
-     })
-
-  }).catch(e => {
-      res.send({
-          error: e.message,
-          result: null
-      });
-  });
+ res.send({
+   result: "OK",
+   error: null
+ })
 }
 
 async function getGuidLifetime(req, res) {

@@ -1,7 +1,6 @@
 const Markup = require('telegraf/markup');
 const Extra = require('telegraf/extra');
 const Text = require('./../text.json');
-const guid = require('guid');
 
 const start = [
     [Text.keyboard.start.button["0"],  Text.keyboard.start.button["1"]],
@@ -9,8 +8,8 @@ const start = [
     [Text.keyboard.start.button["3"]]
 ];
 
-const inlinePay = Markup.inlineKeyboard([
-    Markup.urlButton("🐃 BUFF QR", `https://dazzling-gates-70947e.netlify.com?tx=${guid.create().value}`)
+const inlinePay = (guid) => Markup.inlineKeyboard([
+    Markup.urlButton("🐃 BUFF QR", `https://dazzling-gates-70947e.netlify.com?tx=${guid}`)
 ]).extra();
 
 const account = [

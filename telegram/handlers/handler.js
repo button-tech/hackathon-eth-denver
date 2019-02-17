@@ -39,7 +39,12 @@ function sendTx(ctx) {
 }
 
 function scanQr(ctx) {
-    return ctx.reply("🔬Scan QR", Keyboard.inlinePay)
+    const key = guid.create().value;
+    utils.client.set(key, JSON.stringify({
+        fromAddress: ctx.message.from.id,
+        toNickname: '',
+    }), 'EX', utils.keyLifeTime);
+    return ctx.reply("🔬Scan QR", Keyboard.inlinePay(key));
 }
 
 function celerChange(ctx) {
