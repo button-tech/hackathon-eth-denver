@@ -50,3 +50,5 @@ Open
 Rhombus Network - We use exchange rate from ETH to USD and BTC to USD to send crypto.
 Celer Network - We use payment channel.
 ShapeShift - We allow users to make a swap from BTC to ETC and back
+POA Network - Use xDai and Bufficon token in Telegram!
+
