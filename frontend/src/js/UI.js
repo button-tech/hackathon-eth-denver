@@ -10,6 +10,9 @@ const explorers = {
         "ticker": "BTC",
         "mainnet": 'https://www.blockchain.com/btc/tx/',
         "testnet": 'https://live.blockcypher.com/btc-testnet/tx/'
+    },
+    "xDAI": {
+        "mainnet": "https://blockscout.com/poa/dai/tx/"
     }
 };
 
