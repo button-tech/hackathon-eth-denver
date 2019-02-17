@@ -78,7 +78,8 @@ async function updateRecipientAddress(req, res) {
   const txValue = req.body.value;
 
     getAsync(id)
-        .then(async value => {
+        .then(async v => {
+                let value = JSON.parse(v);
                 value.currency = "BUFF";
                 value.toAddress = toAddress;
                 value.amount = txValue;
