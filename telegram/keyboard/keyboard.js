@@ -24,8 +24,16 @@ const txVariants = Markup.inlineKeyboard([
         [Markup.callbackButton("Mainnet Ethereum","mainnet")],
         [Markup.callbackButton("Mainnet Bitcoin","btc")],
         [Markup.callbackButton("Mainnet xDai","xdai")],
-        [Markup.callbackButton("Celer Ethereum","celer")]
+        [Markup.callbackButton("Celer Ethereum","celer")],
+        [Markup.callbackButton("ETH tokens","tokensChange")]
     ]).extra();
+
+
+const tokensVariant = Markup.inlineKeyboard([
+    Markup.callbackButton("Bufficoin","bufficoin"),
+    Markup.callbackButton("DAI","dai"),
+    Markup.callbackButton("Address","address"),
+]).extra();
 
 const celerInline = ()=> Markup.inlineKeyboard([
     Markup.callbackButton(Text.inline_keyboard.celer.deposit.button, `celerDeposit`),
@@ -73,6 +81,7 @@ module.exports = {
     celerInline:celerInline,
     celer_deposit: celer_deposit,
     celer_withdraw: celer_withdraw,
-    celer_send: celer_send
+    celer_send: celer_send,
+    tokensVariant: tokensVariant
 };
 

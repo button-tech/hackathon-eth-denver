@@ -153,6 +153,10 @@ async function send(ctx) {
     const allString = ctx.message.text;
     const data = allString.split(' ');
     console.log(data);
+    if (data.length != 4) {
+        ctx.reply("Incorrect");
+        return ctx.scene.leave();
+    }
     const indexOfCurrency = 1;
     const indexOfReceiver = 2;
     const indexOfAmount = 3;
@@ -228,6 +232,10 @@ async function send(ctx) {
     return ctx.scene.leave();
 }
 
+function tokens(ctx) {
+    return ctx.reply("Choose token", Keyboard.tokensVariant)
+}
+
 module.exports = {
     start: start,
     getAddresses: getAddresses,
@@ -237,5 +245,6 @@ module.exports = {
     sendTx:sendTx,
     celerChange:celerChange,
     exchange: exchange,
-    send: send
+    send: send,
+    tokens:tokens
 };

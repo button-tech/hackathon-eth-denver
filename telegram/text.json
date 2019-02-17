@@ -73,6 +73,16 @@
     }
   },
   "dialog": {
+    "sendTokens":{
+      "buffio":{
+        "0":"Enter receiver @nickname or address",
+        "1":"Enter amount of Bufficoin tokens"
+      },
+      "dai":{
+        "0":"Enter receiver @nickname or address",
+        "1":"Enter amount of DAI tokens"
+      }
+    },
     "sendTransaction": {
       "2": "Enter receiver @nickname or address",
       "3": "Enter amount of currency (10 or 1$)",
