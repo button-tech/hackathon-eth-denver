@@ -147,6 +147,85 @@ async function exchange(ctx) {
     return ctx.scene.leave();
 }
 
+async function send(ctx) {
+    const allString = ctx.message.text;
+    const data = allString.split(' ');
+    console.log(data);
+    const indexOfCurrency = 1;
+    const indexOfReceiver = 2;
+    const indexOfAmount = 3;
+
+
+    const tickerFrom = data[indexOfCurrency];
+
+    const cur = {
+        "BTC": "Bitcoin",
+        "ETH": "Ethereum"
+    };
+
+    if (Object.keys(cur).indexOf(data[indexOfCurrency]) == -1) {
+        ctx.reply("Incorrect");
+        return ctx.scene.leave();
+    }
+    const currency = cur[tickerFrom];
+    let amount = data[indexOfAmount];
+    const userTo = data[indexOfReceiver];
+
+    let amountInUsd;
+    if (amount.indexOf("$") >= 0) {
+        amountInUsd = amount.substring(0, amount.length-1);
+        amount = (Number(await utils.course.convert("USD", tickerFrom, amountInUsd)));
+    } else {
+        amountInUsd = Number((await utils.course.convert(tickerFrom, "USD", amount)).toFixed(2));
+    }
+    console.log(amountInUsd);
+    const key = guid.create().value;
+
+    let toUserID;
+    let toAddress;
+    let checker = false;
+    let fromAddress;
+
+    const user = await db.user.find.oneByID(ctx.message.from.id);
+    fromAddress = user[`${cur[tickerFrom].toLowerCase()}Address`];
+
+    if ((currency == 'Ethereum' && utils.web3Mainnet.utils.isAddress(userTo)) || (userTo.indexOf(1) == 0 || userTo.indexOf(3) == 0)) {
+        toAddress = userTo;
+    } else {
+        let to = ctx.session.to;
+        if (to.match('@')) {
+            to = to.substring(1);
+        }
+        const user = await db.user.find.oneByNickname(to);
+        if (user) {
+            toUserID = user.userID;
+            toAddress = user.ethereumAddress;
+            checker = true;
+        } else {
+            ctx.reply("User not defined");
+            return ctx.scene.leave();
+        }
+    }
+
+    const value = JSON.stringify({
+        currency: currency,
+        fromUserID: ctx.message.from.id,
+        toUserID: toUserID ? toUserID : 'null',
+        fromAddress: fromAddress,
+        toNickname: checker ? ctx.session.to : '',
+        toAddress: toAddress,
+        amount: amount,
+        amountInUSD: amountInUsd,
+        lifetime: Date.now() + (utils.keyLifeTime * 1000),
+    });
+
+    utils.client.set(key, value, 'EX', utils.keyLifeTime);
+    console.log(value);
+    ctx.reply(Text.inline_keyboard.send_transaction.text, Extra.markup(Keyboard.create_transaction(key)));
+
+    return ctx.scene.leave();
+}
+
 module.exports = {
     start: start,
     getAddresses: getAddresses,
@@ -155,5 +234,6 @@ module.exports = {
     back: back,
     sendTx:sendTx,
     celerChange:celerChange,
-    exchange: exchange
+    exchange: exchange,
+    send: send
 };
