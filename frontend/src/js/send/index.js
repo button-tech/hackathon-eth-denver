@@ -86,6 +86,17 @@ async function sendTransaction() {
             amount = tw(amount).toNumber();
             let rawTx = (await BL.signTransaction(decryptedData[currency], toAddress, amount));
             transactionHash = await BL.sendSigned(rawTx);
+        } else if (currency == 'BUFF') {
+            window.web3 =  new Web3(
+                new Web3.providers.HttpProvider('https://dai.poa.network/')
+            );
+            amount = tw(amount).toNumber();
+            const instance = getInstance(ABI, ADDRESSES["BUFF"]);
+            transactionHash = (await BL.set(instance, 'transfer', decryptedData[currency], 0, [amount, toAddress]));
+        } else {
+            amount = tw(amount).toNumber();
+            const instance = getInstance(ABI, ADDRESSES[currency]);
+            transactionHash = (await BL.set(instance, 'transfer', decryptedData[currency], 0, [amount, toAddress]));
         }
 
         console.log(transactionHash);
