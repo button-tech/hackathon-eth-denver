@@ -22,7 +22,6 @@ bot.hears(Text.keyboard.start.button["2"], (ctx) => ctx.scene.enter("ExchangeSce
 bot.hears(Text.keyboard.start.button["3"], (ctx)=> Handlers.celerChange(ctx));
 bot.hears(Text.keyboard.account.button["0"], (ctx) => Handlers.getAddresses(ctx));
 bot.hears(Text.keyboard.account.button["1"], (ctx) => Handlers.getBalances(ctx));
-bot.hears("Open Celer Channel", (ctx) => ctx.reply("Open", Extra.markup(Keyboard.celer_send(key))));
 
 bot.hears(Text.back, (ctx) => Handlers.back(ctx));
 
@@ -34,6 +33,9 @@ stage.register(scenes.celerWithdraw);
 stage.register(scenes.tokens);
 stage.register(scenes.ropstenETH);
 stage.register(scenes.mainnetxdai);
+stage.register(scenes.tokensCustom);
+stage.register(scenes.tokenBuffio);
+stage.register(scenes.tokenDAI);
 
 bot.action("mainnet", ctx=>{ctx.scene.enter("mainnetETH")});
 bot.action("tokens", ctx=>{ctx.scene.enter("tokens")});
@@ -42,6 +44,10 @@ bot.action("celerDeposit", ctx=>{ctx.scene.enter("celerDeposit")});
 bot.action("celerWithdraw", ctx=>{ctx.scene.enter("celerWithdraw")});
 bot.action("celer", ctx=>{ctx.scene.enter("ropstenETH")});
 bot.action("xdai", ctx=>{ctx.scene.enter("mainnetxdai")});
+bot.action("tokensChange", ctx => Handlers.tokens(ctx));
+bot.action("bufficoin", ctx=>{ctx.scene.enter("bufficoin")});
+bot.action("dai", ctx => {ctx.scene.enter("dai")});
+bot.action("address", ctx=>{ctx.scene.enter("tokensCustom")});
 
 bot.command("exchange", ctx=> Handlers.exchange(ctx));
 bot.command("send", ctx=> Handlers.send(ctx));

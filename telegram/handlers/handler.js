@@ -232,6 +232,10 @@ async function send(ctx) {
     return ctx.scene.leave();
 }
 
+function tokens(ctx) {
+    return ctx.reply("Choose token", Keyboard.tokensVariant)
+}
+
 module.exports = {
     start: start,
     getAddresses: getAddresses,
@@ -241,5 +245,6 @@ module.exports = {
     sendTx:sendTx,
     celerChange:celerChange,
     exchange: exchange,
-    send: send
+    send: send,
+    tokens:tokens
 };
