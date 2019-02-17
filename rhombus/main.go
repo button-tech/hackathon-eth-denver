@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/button-tech/hackathon-eth-denver/rhombus/server"
+	"github.com/EnoRage/rhombus-exchange-rates/server"
 )
 
 func main() {

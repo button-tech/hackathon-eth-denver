@@ -1,9 +1,9 @@
 package server
 
 import (
-	_ "github.com/button-tech/hackathon-eth-denver/rhombus/docs"
-	"github.com/button-tech/hackathon-eth-denver/rhombus/ethereum"
-	"github.com/button-tech/hackathon-eth-denver/rhombus/responses"
+	_ "github.com/EnoRage/rhombus-exchange-rates/docs"
+	"github.com/EnoRage/rhombus-exchange-rates/ethereum"
+	"github.com/EnoRage/rhombus-exchange-rates/responses"
 	"github.com/gin-gonic/contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/swaggo/gin-swagger"

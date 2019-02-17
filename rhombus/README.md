@@ -22,3 +22,4 @@ MIT
 Nick Kozlov - enormousrage@gmail.com
 
 Did it during ETH Denver 2019 Hackthon
+# utils-rhombus-exchange-rates
