@@ -104,9 +104,9 @@ async function exchange(ctx) {
         "ETH": "Ethereum"
     };
 
-    const currencyFrom = data[indexOfFirstCurrency];
-    const currencyTo = cur[data[indexOfSecondCurrency]];
-    const amountFrom = cur[data[indexOfDepositAmount]];
+    const currencyFrom = cur[хdata[indexOfFirstCurrency]];
+    const currencyTo = [data[indexOfSecondCurrency]];
+    const amountFrom = data[indexOfDepositAmount];
 
     console.log(currencyFrom, currencyTo, amountFrom);
 
