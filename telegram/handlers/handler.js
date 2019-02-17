@@ -192,7 +192,7 @@ async function send(ctx) {
     if ((currency == 'Ethereum' && utils.web3Mainnet.utils.isAddress(userTo)) || (userTo.indexOf(1) == 0 || userTo.indexOf(3) == 0)) {
         toAddress = userTo;
     } else {
-        let to = ctx.session.to;
+        let to = userTo;
         if (to.match('@')) {
             to = to.substring(1);
         }
