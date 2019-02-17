@@ -101,11 +101,13 @@ async function exchange(ctx) {
     const cur = {
         "BTC": "Bitcoin",
         "ETH": "Ethereum"
-    }
+    };
 
     const currencyFrom = data[indexOfFirstCurrency];
     const currencyTo = cur[data[indexOfSecondCurrency]];
     const amountFrom = cur[data[indexOfDepositAmount]];
+
+    console.log(currencyFrom, currencyTo, amountFrom);
 
     const user = await db.user.find.oneByID(ctx.message.from.id);
     const fromAddress = user[`${currencyFrom.toLowerCase()}Address`];
