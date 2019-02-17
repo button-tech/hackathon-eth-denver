@@ -64,12 +64,13 @@ async function getBalances(ctx) {
     const user = await db.user.find.oneByID(ctx.message.from.id);
     const balanceETHRopsten = await utils.web3Ropsten.eth.getBalance(user.ethereumAddress);
     const balanceETHMain = await utils.web3Mainnet.eth.getBalance(user.ethereumAddress);
+    const balanceXDai = await utils.web3XDai.eth.getBalance(user.ethereumAddress);
     const tokensTickers = Object.keys(token.supportedTokens);
     const tokenAddresses = Object.values(token.supportedTokens);
     const tokenBalances = await rp.getTokenBalance(tokenAddresses, user.ethereumAddress);
     const btcBalance = await rp.getBTCBalance(user.bitcoinAddress);
     console.log(tokenBalances);
-    let msg = `*Mainnet Ethereum:* ${balanceETHMain/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHMain/1e18)))}$ \n\n*Ropsten Ethereum:* ${balanceETHRopsten/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHRopsten/1e18)))}$\n\n*BTC:* ${btcBalance} or ${(Number(await utils.course.convert("BTC", "USD", btcBalance)))}$\n\n`;
+    let msg = `*Mainnet Ethereum:* ${balanceETHMain/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHMain/1e18)))}$ \n\n*Ropsten Ethereum:* ${balanceETHRopsten/1e18} or ${(Number(await utils.course.convert("ETH", "USD", balanceETHRopsten/1e18)))}$\n\n*BTC:* ${btcBalance} or ${(Number(await utils.course.convert("BTC", "USD", btcBalance)))}$\n\n*xDAI:* ${balanceXDai/1e18} or ${(Number(await utils.course.convert("BTC", "USD", balanceXDai/1e18)))}$`;
     let counter = 0;
     for (let i in tokensTickers) {
         msg += `*${tokensTickers[i]}:* ${Number(tokenBalances[counter])/1e18}\n\n`;

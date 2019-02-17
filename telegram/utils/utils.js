@@ -52,6 +52,7 @@ module.exports = {
     client: client,
     web3Mainnet: new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/${process.env.INFURA_TOKEN}`)),
     web3Ropsten: new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/${process.env.INFURA_TOKEN}`)),
+    web3XDai: new Web3(new Web3.providers.HttpProvider('https://dai.poa.network/')),
     currency: currency
 };
 
