@@ -104,14 +104,14 @@ async function exchange(ctx) {
         "ETH": "Ethereum"
     };
 
-    const currencyFrom = cur[data[indexOfFirstCurrency]];
-    const currencyTo = cur[data[indexOfSecondCurrency]];
-    const amountFrom = data[indexOfDepositAmount];
-
-    if (Object.keys(cur).indexOf(currencyFrom) == -1 || Object.keys(cur).indexOf(currencyFrom) == -1) {
+    if (Object.keys(cur).indexOf(data[indexOfFirstCurrency]) == -1 || Object.keys(cur).indexOf(data[indexOfSecondCurrency]) == -1) {
         ctx.reply("Incorrect");
         return ctx.scene.leave();
     }
+
+    const currencyFrom = cur[data[indexOfFirstCurrency]];
+    const currencyTo = cur[data[indexOfSecondCurrency]];
+    const amountFrom = data[indexOfDepositAmount];
 
     const user = await db.user.find.oneByID(ctx.message.from.id);
     const fromAddress = user[`${currencyFrom.toLowerCase()}Address`];
