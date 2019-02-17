@@ -7,6 +7,7 @@ const Text = require('./../text');
 const db = require('./../db/db');
 const utils = require('./../utils/utils');
 const token = require('./../tokens/tokens');
+const { ShapeShift } = require('../shapeshift/shapeshift');
 require('dotenv').config({path: "./../../.env"});
 
 async function start(ctx) {
