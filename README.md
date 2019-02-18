@@ -33,7 +33,7 @@ Telegram client to send and swap crypto secure via @nickname!
 
 # Status.im ID for Each Team Member (we will use this to contact you and your team)
 
-0x041e6b6678b4ad827bee8468223846aef2c0cf0ad6f6b5c9cc8a9dd8dbbcb2a1cbe3ced34f1ffe594dd2da3b893311526f21aca112c6d61b9f79df2ae22068b276 - Nick Kozlov
+0x04dbfefffadd8acd9e0ece9c52b06440b4b10e2a1ccc52cb546e7923f116bc05e94b39d7f738cb1967545aaaa5f9b540ab1430b719142530be2ef6780b0b738bb1 - Nick Kozlov
 
 0x04c82289eaa626c216ed3d255fa55f9bfa648ac18ba924ab76a5ea9c4b3a6e2eebd94118260afa7ba39abc7174d010eb172fa0e69b1dfbc0015be86886b45bc4f4 - Kirill Kuznetcov 
 
